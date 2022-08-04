@@ -9,8 +9,8 @@ import (
 
 func main() {
 
-	os.Args = os.Args[:1]
-	if len(os.Args) >= 2 {
+	switch arguments := len(os.Args); {
+	case arguments >= 3:
 
 		version1, err := version_core.Get(os.Args[1])
 		if err != nil {
@@ -43,8 +43,10 @@ func main() {
 
 		fmt.Printf("%s\n", compare)
 
-	}
+	default:
 
-	fmt.Printf("Error! Not enoght arguments.\n")
+		fmt.Printf("Error! Not enoght arguments.\n")
+
+	}
 
 }
