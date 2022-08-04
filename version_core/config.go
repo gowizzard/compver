@@ -1,6 +1,6 @@
 package version_core
 
-type Body struct {
+type Split struct {
 	Major int
 	Minor int
 	Patch int

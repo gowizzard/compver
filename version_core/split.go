@@ -5,19 +5,19 @@ import (
 	"regexp"
 )
 
-var body = Body{}
+var split = Split{}
 
-func Get(version string) (Body, error) {
+func Get(version string) (Split, error) {
 
-	regex := regexp.MustCompile("(\\\\,)?(\\\\.)?(\\*|\\d+)")
+	regex := regexp.MustCompile("(,)?([*]|\\d+)")
 
 	find := regex.FindAllString(version, 3)
 	if len(find) >= 3 {
-		body.Major = convert.Integer(find[0])
-		body.Minor = convert.Integer(find[1])
-		body.Patch = convert.Integer(find[2])
+		split.Major = convert.Integer(find[0])
+		split.Minor = convert.Integer(find[1])
+		split.Patch = convert.Integer(find[2])
 	}
 
-	return body, nil
+	return split, nil
 
 }
