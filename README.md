@@ -6,7 +6,7 @@ With this small cli tool, you can compare two versions with each other. **Curren
 
 ## Installation
 
-In order to install the tool correctly, you need to download it here and make it executable. After that you can move the binary into the application folder and use it via the terminal.
+In order to install the tool correctly, you need to download it [here](https://github.com/gowizzard/compver/releases) and make it executable. After that you can move the binary into the application folder and use it via the terminal.
 
 ```shell
 # Download the binary
