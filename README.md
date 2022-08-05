@@ -29,7 +29,7 @@ Actually, you don't need to know much to execute the command. You actually only 
 compver <version1> <version2>
 ```
 
-If this command is executed now, we get an information back, this can contain the following information: `no changes`, `major update`, `major downgrade`, `minor update`, `minor downgrade`, `patch update`, `patch downgrade`.
+If this command is executed now, we get an information back, this can contain the following information: `no changes`, `major update`, `major downgrade`, `minor update`, `minor downgrade`, `patch update` & `patch downgrade`.
 
 ## Special thanks
 
