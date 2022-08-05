@@ -13,7 +13,7 @@ var core = Core{}
 // And split the value in major, minor and patch
 func Split(version string) (Core, error) {
 
-	regex := regexp.MustCompile("(,)?([*]|\\d+)")
+	regex := regexp.MustCompile(`(,)?([*]|\d+)`)
 
 	find := regex.FindAllString(version, 3)
 	for index, value := range find {
