@@ -1,7 +1,7 @@
 package version_core
 
-// Split is to save the version core as major, minor and patch
-type Split struct {
+// Core is to save the version core as major, minor and patch
+type Core struct {
 	Major int
 	Minor int
 	Patch int

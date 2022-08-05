@@ -15,12 +15,12 @@ func main() {
 	switch arguments := len(os.Args); {
 	case arguments >= 3:
 
-		version1, err := version_core.Get(os.Args[1])
+		core1, err := version_core.Split(os.Args[1])
 		if err != nil {
 			log.Fatalln(err)
 		}
 
-		version2, err := version_core.Get(os.Args[2])
+		core2, err := version_core.Split(os.Args[2])
 		if err != nil {
 			log.Fatalln(err)
 		}
@@ -29,16 +29,16 @@ func main() {
 		blocks = append(
 			blocks, version_core.Block{
 				Name:    "major",
-				Number1: version1.Major,
-				Number2: version2.Major,
+				Number1: core1.Major,
+				Number2: core2.Major,
 			}, version_core.Block{
 				Name:    "minor",
-				Number1: version1.Minor,
-				Number2: version2.Minor,
+				Number1: core1.Minor,
+				Number2: core2.Minor,
 			}, version_core.Block{
 				Name:    "patch",
-				Number1: version1.Patch,
-				Number2: version2.Patch,
+				Number1: core1.Patch,
+				Number2: core2.Patch,
 			},
 		)
 

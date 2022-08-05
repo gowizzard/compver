@@ -6,12 +6,12 @@ import (
 )
 
 // split is to save the version core blocks in a struct
-var split = Split{}
+var core = Core{}
 
-// Get is to check the given version as a string
+// Split is to check the given version as a string
 // The function checks the string with regex
 // And split the value in major, minor and patch
-func Get(version string) (Split, error) {
+func Split(version string) (Core, error) {
 
 	regex := regexp.MustCompile("(,)?([*]|\\d+)")
 
@@ -19,14 +19,14 @@ func Get(version string) (Split, error) {
 	for index, value := range find {
 		switch index {
 		case 0:
-			split.Major = convert.Integer(value)
+			core.Major = convert.Integer(value)
 		case 1:
-			split.Minor = convert.Integer(value)
+			core.Minor = convert.Integer(value)
 		case 2:
-			split.Patch = convert.Integer(value)
+			core.Patch = convert.Integer(value)
 		}
 	}
 
-	return split, nil
+	return core, nil
 
 }
