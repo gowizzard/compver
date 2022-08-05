@@ -4,6 +4,8 @@
 
 With this small cli tool, you can compare two versions with each other. **Currently, it is important to know that we only compare the version core (x.y.z).** This means that currently the pre-releases and the meta information are not taken into account.
 
+Our version specifications are based on semantic versioning. [Here](https://semver.org/) you can find the corresponding definition.
+
 ## Installation
 
 In order to install the tool correctly, you need to download it [here](https://github.com/gowizzard/compver/releases) and make it executable. After that you can move the binary into the application folder and use it via the terminal.
