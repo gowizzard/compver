@@ -7,6 +7,9 @@ import (
 	"os"
 )
 
+// main is to check the arguments from the cli
+// Split the version core in major, minor & patch
+// And check the compare of the single blocks
 func main() {
 
 	switch arguments := len(os.Args); {
