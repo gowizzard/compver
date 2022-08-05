@@ -6,7 +6,11 @@ import (
 )
 
 // split is to save the version core blocks in a struct
-var core = Core{}
+var core = Core{
+	Major: 0,
+	Minor: 0,
+	Patch: 0,
+}
 
 // Split is to check the given version as a string
 // The function checks the string with regex
