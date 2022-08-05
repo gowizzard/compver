@@ -10,7 +10,7 @@ Our version specifications are based on semantic versioning. [Here](https://semv
 
 In order to install the tool correctly, you need to download it [here](https://github.com/gowizzard/compver/releases) and make it executable. After that you can move the binary into the application folder and use it via the terminal.
 
-```shell
+```bash
 # Download the binary
 curl -L -o compver <URL>
 
@@ -25,7 +25,7 @@ sudo mv compver /usr/local/bin
 
 Actually, you don't need to know much to execute the command. You actually only compare the newest version with the older version. We assume that version1 is the newer version and version2 is the older one. But downgrades of versions can also be recorded.
 
-```shell
+```bash
 compver <version1> <version2>
 ```
 
