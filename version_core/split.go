@@ -5,8 +5,12 @@ import (
 	"regexp"
 )
 
+// split is to save the version core blocks in a struct
 var split = Split{}
 
+// Get is to check the given version as a string
+// The function checks the string with regex
+// And split the value in major, minor and patch
 func Get(version string) (Split, error) {
 
 	regex := regexp.MustCompile("(,)?([*]|\\d+)")

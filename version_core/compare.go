@@ -1,5 +1,7 @@
 package version_core
 
+// Compare is to check the different version core blocks
+// The function returns a string with the information like `major update`
 func Compare(blocks []Block) string {
 
 	for _, value := range blocks {
