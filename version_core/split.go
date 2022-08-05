@@ -12,10 +12,15 @@ func Get(version string) (Split, error) {
 	regex := regexp.MustCompile("(,)?([*]|\\d+)")
 
 	find := regex.FindAllString(version, 3)
-	if len(find) >= 3 {
-		split.Major = convert.Integer(find[0])
-		split.Minor = convert.Integer(find[1])
-		split.Patch = convert.Integer(find[2])
+	for index, value := range find {
+		switch index {
+		case 0:
+			split.Major = convert.Integer(value)
+		case 1:
+			split.Minor = convert.Integer(value)
+		case 2:
+			split.Patch = convert.Integer(value)
+		}
 	}
 
 	return split, nil
