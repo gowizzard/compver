@@ -15,6 +15,6 @@ func TestSplit(t *testing.T) {
 		log.Fatalln(err)
 	}
 
-	t.Logf("The split function returns the following values. For the major: \"%d\", the minor: \"%d\" and the patch: \"%d\".\n", core.Major, core.Minor, core.Patch)
+	t.Logf("The split function returns the following values. For the major: \"%d\", the minor: \"%d\" and the patch: \"%d\". The original version number was \"%s\".\n", core.Major, core.Minor, core.Patch, version)
 
 }
