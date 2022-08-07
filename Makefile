@@ -11,6 +11,6 @@ lint:
 	golangci-lint run ./...
 
 build:
-	GOOS=windows GOARCH=amd64 go build -o build/${BINARY_NAME}-amd64.exe
+	GOOS=windows GOARCH=amd64 go build -o build/${BINARY_NAME}-amd64-windows.exe
 	GOOS=linux GOARCH=amd64 go build -o build/${BINARY_NAME}-amd64-linux
 	GOOS=darwin GOARCH=amd64 go build -o build/${BINARY_NAME}-amd64-darwin
