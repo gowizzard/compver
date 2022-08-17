@@ -12,8 +12,8 @@ import (
 // And check the compare of the single blocks
 func main() {
 
-	switch arguments := len(os.Args); {
-	case arguments >= 3:
+	switch arguments := os.Args[1:]; {
+	case len(arguments) >= 2:
 
 		core1, err := version_core.Split(os.Args[1])
 		if err != nil {
