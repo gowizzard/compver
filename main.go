@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"github.com/gowizzard/compver/version_core"
-	"log"
 	"os"
 )
 
@@ -17,12 +16,14 @@ func main() {
 
 		core1, err := version_core.Split(os.Args[1])
 		if err != nil {
-			log.Fatalln(err)
+			fmt.Printf("%s\n", err)
+			os.Exit(1)
 		}
 
 		core2, err := version_core.Split(os.Args[2])
 		if err != nil {
-			log.Fatalln(err)
+			fmt.Printf("%v\n", err)
+			os.Exit(1)
 		}
 
 		var blocks []version_core.Block
@@ -45,10 +46,12 @@ func main() {
 		compare := version_core.Compare(blocks)
 
 		fmt.Printf("%s\n", compare)
+		os.Exit(0)
 
 	default:
 
 		fmt.Printf("Error! Not enoght arguments.\n")
+		os.Exit(1)
 
 	}
 
