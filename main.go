@@ -11,7 +11,17 @@ import (
 var (
 	version1 *string
 	version2 *string
+	found    = Found{
+		Version1: false,
+		Version2: false,
+	}
 )
+
+// Found is to check if the flags are used
+type Found struct {
+	Version1 bool
+	Version2 bool
+}
 
 // init is to parse the versions from the flags
 func init() {
@@ -20,13 +30,21 @@ func init() {
 	flag.Parse()
 }
 
-// main is to check the arguments from the cli
+// main is to check the flags from the cli
 // Split the version core in major, minor & patch
 // And check the compare of the single blocks
 func main() {
 
-	switch arguments := os.Args[1:]; {
-	case len(arguments) >= 4:
+	flag.Visit(func(f *flag.Flag) {
+		switch f.Name {
+		case "version1":
+			found.Version1 = true
+		case "version2":
+			found.Version2 = true
+		}
+	})
+
+	if found.Version1 && found.Version2 {
 
 		core1, err := version_core.Split(*version1)
 		if err != nil {
@@ -62,9 +80,9 @@ func main() {
 		fmt.Printf("%s\n", compare)
 		os.Exit(0)
 
-	default:
+	} else {
 
-		fmt.Printf("Error! Not enoght arguments.\n")
+		fmt.Printf("Error! Not all required flags were specified.\n")
 		os.Exit(1)
 
 	}
