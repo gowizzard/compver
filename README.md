@@ -26,7 +26,7 @@ sudo mv compver /usr/local/bin
 Actually, you don't need to know much to execute the command. You actually only compare the newest version with the older version. We assume that `VERSION1` is the newer version and `VERSION2` is the older one. But downgrades of versions can also be recorded.
 
 ```bash
-compver --version1 <VERSION1> --version2 <VERSION2>
+compver -version1 <VERSION1> -version2 <VERSION2>
 ```
 
 If this command is executed now, we get an information back, this can contain the following information: `no changes`, `major update`, `major downgrade`, `minor update`, `minor downgrade`, `patch update` & `patch downgrade`.
