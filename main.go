@@ -1,10 +1,24 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"github.com/gowizzard/compver/version_core"
 	"os"
 )
+
+// version1, version2 is to save the version numbers from the flags
+var (
+	version1 *string
+	version2 *string
+)
+
+// init is to parse the versions from the flags
+func init() {
+	version1 = flag.String("version1", "1.0.0", "Set the first version number")
+	version2 = flag.String("version2", "1.0.0", "Set the second version number")
+	flag.Parse()
+}
 
 // main is to check the arguments from the cli
 // Split the version core in major, minor & patch
@@ -12,15 +26,15 @@ import (
 func main() {
 
 	switch arguments := os.Args[1:]; {
-	case len(arguments) >= 2:
+	case len(arguments) >= 4:
 
-		core1, err := version_core.Split(os.Args[1])
+		core1, err := version_core.Split(*version1)
 		if err != nil {
 			fmt.Printf("%s\n", err)
 			os.Exit(1)
 		}
 
-		core2, err := version_core.Split(os.Args[2])
+		core2, err := version_core.Split(*version2)
 		if err != nil {
 			fmt.Printf("%v\n", err)
 			os.Exit(1)
