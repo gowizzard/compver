@@ -15,8 +15,8 @@ var (
 
 // init is to parse the versions from the flags
 func init() {
-	version1 = flag.String("version1", "1.0.0", "Set the first version number")
-	version2 = flag.String("version2", "1.0.0", "Set the second version number")
+	version1 = flag.String("version1", "1.1.0", "Set the first version number")
+	version2 = flag.String("version2", "1.0.5", "Set the second version number")
 	flag.Parse()
 }
 
