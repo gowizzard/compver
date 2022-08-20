@@ -2,6 +2,7 @@ package convert_test
 
 import (
 	"github.com/gowizzard/compver/convert"
+	"reflect"
 	"testing"
 )
 
@@ -10,9 +11,40 @@ import (
 // The return value is output for logging
 func TestInteger(t *testing.T) {
 
-	value := "5"
-	integer := convert.Integer(value)
+	tests := []struct {
+		number   string
+		expected int
+	}{
+		{
+			number:   "5",
+			expected: 5,
+		},
+		{
+			number:   "265",
+			expected: 265,
+		},
+		{
+			number:   "78",
+			expected: 78,
+		},
+		{
+			number:   "132",
+			expected: 132,
+		},
+		{
+			number:   "25",
+			expected: 25,
+		},
+	}
 
-	t.Logf("The gotten value of the integer is \"%d\". The expected value was \"%s\".\n", integer, value)
+	for _, value := range tests {
+
+		integer := convert.Integer(value.number)
+
+		if !reflect.DeepEqual(value.expected, integer) {
+			t.Fatalf("expected: %d, got %d", value.expected, integer)
+		}
+
+	}
 
 }
