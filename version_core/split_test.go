@@ -7,6 +7,8 @@ import (
 	"testing"
 )
 
+// TestSplit is to check the version core split function
+// We simulate the version input and check the result
 func TestSplit(t *testing.T) {
 
 	tests := []struct {
