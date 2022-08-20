@@ -7,8 +7,7 @@ import (
 )
 
 // TestCompare is to check the version core compare function
-// We simulate the major, minor & patch values
-// And log the returned value
+// We simulate the major, minor & patch values and check the result
 func TestCompare(t *testing.T) {
 
 	tests := []struct {

@@ -7,8 +7,7 @@ import (
 )
 
 // TestInteger is to test the convert integer function
-// We set a local variable & convert it to integer
-// The return value is output for logging
+// We convert a number it to an integer and check the result
 func TestInteger(t *testing.T) {
 
 	tests := []struct {
