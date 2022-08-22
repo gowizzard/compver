@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/gowizzard/compver/version_core"
+	"github.com/gowizzard/compver/v2/version_core"
 	"os"
 )
 
