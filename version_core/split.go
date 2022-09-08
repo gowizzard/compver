@@ -5,6 +5,9 @@ import (
 	"regexp"
 )
 
+// regex is to save the compiled expression
+var regex = regexp.MustCompile(`(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)`)
+
 // Split is to check the given version as a string
 // The function checks the string with regex
 // And split the value in major, minor and patch
@@ -16,17 +19,15 @@ func Split(version string) (Core, error) {
 		Patch: 0,
 	}
 
-	regex := regexp.MustCompile(`[*]|\d+`)
-
-	find := regex.FindAllString(version, 3)
-	for index, value := range find {
-		switch index {
-		case 0:
-			core.Major = convert.Integer(value)
-		case 1:
-			core.Minor = convert.Integer(value)
-		case 2:
-			core.Patch = convert.Integer(value)
+	match := regex.FindStringSubmatch(version)
+	for index, value := range regex.SubexpNames() {
+		switch value {
+		case "major":
+			core.Major = convert.Integer(match[index])
+		case "minor":
+			core.Minor = convert.Integer(match[index])
+		case "patch":
+			core.Patch = convert.Integer(match[index])
 		}
 	}
 
