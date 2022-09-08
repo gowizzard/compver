@@ -2,9 +2,9 @@
 
 [![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/gowizzard/compver.svg)](https://golang.org/) [![Go](https://github.com/gowizzard/compver/actions/workflows/go.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/go.yml) [![CodeQL](https://github.com/gowizzard/compver/actions/workflows/codeql.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/codeql.yml) [![VMerge](https://github.com/gowizzard/compver/actions/workflows/vmerge.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/vmerge.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/gowizzard/compver/v2)](https://goreportcard.com/report/github.com/gowizzard/compver/v2) [![GitHub issues](https://img.shields.io/github/issues/gowizzard/compver)](https://github.com/gowizzard/compver/issues) [![GitHub forks](https://img.shields.io/github/forks/gowizzard/compver)](https://github.com/gowizzard/compver/network) [![GitHub stars](https://img.shields.io/github/stars/gowizzard/compver)](https://github.com/gowizzard/compver/stargazers) [![GitHub license](https://img.shields.io/github/license/gowizzard/compver)](https://github.com/gowizzard/compver/blob/master/LICENSE)
 
-With this small cli tool, you can compare two versions with each other. **Currently, it is important to know that we only compare the version core (x.y.z).** This means that currently the pre-releases and the meta information are not taken into account.
+With this small cli tool, you can compare two versions with each other. **Currently, it is important to know that we only compare the version core `x.y.z`.** This means that currently the pre-releases and the meta information are not taken into account.
 
-Our version specifications are based on semantic versioning. [Here](https://semver.org/) you can find the corresponding definition.
+Our version specifications are based on semantic versioning. [Here](https://semver.org/) you can find the corresponding definition. So that major, minor and patch can be read correctly, we use regex. You can find [here](https://regex101.com/r/un81dE/4) at regex101 once the used expression. We made sure that we can read versions with a preceding `v` as well.
 
 ## Installation
 
