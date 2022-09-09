@@ -1,7 +1,7 @@
 package convert_test
 
 import (
-	"github.com/gowizzard/compver/v2/convert"
+	"github.com/gowizzard/compver/v3/convert"
 	"reflect"
 	"testing"
 )
@@ -41,7 +41,7 @@ func TestInteger(t *testing.T) {
 		integer := convert.Integer(value.number)
 
 		if !reflect.DeepEqual(value.expected, integer) {
-			t.Fatalf("expected: %d, got %d", value.expected, integer)
+			t.Fatalf("expected: \"%d\", got \"%d\"", value.expected, integer)
 		}
 
 	}

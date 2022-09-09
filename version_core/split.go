@@ -1,7 +1,7 @@
 package version_core
 
 import (
-	"github.com/gowizzard/compver/v2/convert"
+	"github.com/gowizzard/compver/v3/convert"
 	"regexp"
 )
 
