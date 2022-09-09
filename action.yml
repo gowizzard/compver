@@ -1,0 +1,14 @@
+name: "CompVer"
+description: "Is used to get the major version number to merge into the version branch."
+author: "Jonas Kwiedor"
+branding:
+    icon: "git-merge"
+    color: "gray-dark"
+outputs:
+    compare:
+        description: "Here you get the compare information."
+    number:
+        description: "Here you get the number for the desired version core block."
+runs:
+    using: "docker"
+    image: "Dockerfile"
