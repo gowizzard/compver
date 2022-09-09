@@ -84,7 +84,7 @@ func TestSplit(t *testing.T) {
 
 		for _, value := range numbers {
 			if !reflect.DeepEqual(value.Number1, value.Number2) {
-				t.Fatalf("expected: %d, got %d", value.Number1, value.Number2)
+				t.Fatalf("expected: \"%d\", got \"%d\"", value.Number1, value.Number2)
 			}
 		}
 
