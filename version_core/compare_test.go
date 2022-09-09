@@ -1,7 +1,7 @@
 package version_core_test
 
 import (
-	"github.com/gowizzard/compver/v2/version_core"
+	"github.com/gowizzard/compver/v3/version_core"
 	"reflect"
 	"testing"
 )
@@ -117,7 +117,7 @@ func TestCompare(t *testing.T) {
 		compare := version_core.Compare(blocks)
 
 		if !reflect.DeepEqual(value.expected, compare) {
-			t.Fatalf("expected: %s, got %s", value.expected, compare)
+			t.Fatalf("expected: \"%s\", got \"%s\"", value.expected, compare)
 		}
 
 	}
