@@ -1,7 +1,7 @@
 package statement
 
 import (
-	"github.com/gowizzard/compver/v2/version_core"
+	"github.com/gowizzard/compver/v3/version_core"
 )
 
 // Compare is to compare the versions & return the result

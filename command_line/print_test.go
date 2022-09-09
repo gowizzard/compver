@@ -2,7 +2,7 @@ package command_line_test
 
 import (
 	"errors"
-	"github.com/gowizzard/compver/v2/command_line"
+	"github.com/gowizzard/compver/v3/command_line"
 	"testing"
 )
 
