@@ -79,7 +79,7 @@ jobs:
 
       - name: Get the major version
         id: compver
-        uses: gowizzard/compver@v3.1.1
+        uses: gowizzard/compver@v3.1.2
         with:
           args: "-core -block major -version1 ${{ steps.information.outputs.tag }}"
 
@@ -93,7 +93,7 @@ jobs:
           git fetch
           git checkout v${{ steps.compver.outputs.number }}
           git pull
-          git merge --no-ff "origin/$DEFAULT_BRANCH" -m "COMMIT_MESSAGE"
+          git merge --no-ff "origin/$DEFAULT_BRANCH" -m "$COMMIT_MESSAGE"
           git push
 ```
 
