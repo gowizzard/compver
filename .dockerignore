@@ -1,0 +1,12 @@
+# First we ignore all folders & files
+# After that we ignore the file types & more
+.git/
+.github/
+.idea/
+
+.gitignore
+LICENSE
+
+*.md
+*.yml
+**/*_test.go
