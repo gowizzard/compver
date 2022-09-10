@@ -1,6 +1,6 @@
 # CompVer
 
-[![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/gowizzard/compver.svg)](https://golang.org/) [![Go](https://github.com/gowizzard/compver/actions/workflows/go.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/go.yml) [![CodeQL](https://github.com/gowizzard/compver/actions/workflows/codeql.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/codeql.yml) [![VMerge](https://github.com/gowizzard/compver/actions/workflows/vmerge.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/vmerge.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/gowizzard/compver/v3)](https://goreportcard.com/report/github.com/gowizzard/compver/v3) [![GitHub issues](https://img.shields.io/github/issues/gowizzard/compver)](https://github.com/gowizzard/compver/issues) [![GitHub forks](https://img.shields.io/github/forks/gowizzard/compver)](https://github.com/gowizzard/compver/network) [![GitHub stars](https://img.shields.io/github/stars/gowizzard/compver)](https://github.com/gowizzard/compver/stargazers) [![GitHub license](https://img.shields.io/github/license/gowizzard/compver)](https://github.com/gowizzard/compver/blob/master/LICENSE)
+[![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/gowizzard/compver.svg)](https://golang.org/) [![Go](https://github.com/gowizzard/compver/actions/workflows/go.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/go.yml) [![CodeQL](https://github.com/gowizzard/compver/actions/workflows/codeql.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/codeql.yml) [![CompVer](https://github.com/gowizzard/compver/actions/workflows/compver.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/compver.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/gowizzard/compver/v3)](https://goreportcard.com/report/github.com/gowizzard/compver/v3) [![GitHub issues](https://img.shields.io/github/issues/gowizzard/compver)](https://github.com/gowizzard/compver/issues) [![GitHub forks](https://img.shields.io/github/forks/gowizzard/compver)](https://github.com/gowizzard/compver/network) [![GitHub stars](https://img.shields.io/github/stars/gowizzard/compver)](https://github.com/gowizzard/compver/stargazers) [![GitHub license](https://img.shields.io/github/license/gowizzard/compver)](https://github.com/gowizzard/compver/blob/master/LICENSE)
 
 With this small cli tool, you can compare two versions with each other. **Currently, it is important to know that we only compare the version core `x.y.z`.** This means that currently the pre-releases and the meta information are not taken into account.
 
@@ -50,7 +50,7 @@ Here you can find an example if you want to use CompVer as a GitHub Action. In t
 I use this example a lot when I need to maintain major branches. Especially when developing Golang libraries this is very important. The action takes the release version and determines the major block of the version core. Then the version branch, for example `v3, is merged with the default branch, so that the version branch is always up-to-date. So you only have to create the branch once and don't have to worry about it not being maintained.
 
 ```yaml
-name: CompVer 
+name: CompVer
 
 on:
   push:
@@ -79,9 +79,9 @@ jobs:
 
       - name: Get the major version
         id: compver
-        uses: gowizzard/compver@v3
+        uses: gowizzard/compver@v3.1.1
         with:
-          args: "-core -block major ${{ steps.information.outputs.tag }}"
+          args: "-core -block major -version1 ${{ steps.information.outputs.tag }}"
 
       - name: Set git config
         run: |
@@ -91,10 +91,10 @@ jobs:
       - name: Merge data from default branch
         run: |
           git fetch
-          git checkout v${{ steps.compver.outputs.compare }}
+          git checkout v${{ steps.compver.outputs.number }}
           git pull
-          git merge --no-ff "origin/$DEFAULT_BRANCH" -m "$COMMIT_MESSAGE"
-          git push  
+          git merge --no-ff "origin/$DEFAULT_BRANCH" -m "COMMIT_MESSAGE"
+          git push
 ```
 
 ## Special thanks
