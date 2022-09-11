@@ -47,7 +47,7 @@ compver -core -block major -version1 <VERSION1>
 
 Here you can find an example if you want to use CompVer as a GitHub Action. In the example the action is only triggered when a new release is created.
 
-I use this example a lot when I need to maintain major branches. Especially when developing Golang libraries this is very important. The action takes the release version and determines the major block of the version core. Then the version branch, for example `v3, is merged with the default branch, so that the version branch is always up-to-date. So you only have to create the branch once and don't have to worry about it not being maintained.
+I use this example a lot when I need to maintain major branches. Especially when developing Golang libraries this is very important. The action takes the release version and determines the major block of the version core. Then the version branch, for example `v3`, is merged with the default branch, so that the version branch is always up-to-date. So you only have to create the branch once and don't have to worry about it not being maintained.
 
 ```yaml
 name: CompVer
