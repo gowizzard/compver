@@ -5,10 +5,10 @@ branding:
     icon: "git-merge"
     color: "gray-dark"
 outputs:
-    compare:
-        description: "Here you get the compare information."
-    number:
-        description: "Here you get the number for the desired version core block."
+    compare_result:
+        description: "Here you get the compare result."
+    core_number:
+        description: "Here you get the core number for the desired version core block."
 runs:
     using: "docker"
     image: "Dockerfile"
