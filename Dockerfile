@@ -5,11 +5,10 @@
 FROM golang:alpine AS build
 
 RUN apk --no-cache add \
+    git \
     make
 
 WORKDIR /tmp/src
-
-COPY go.mod .
 
 COPY . .
 RUN make build
