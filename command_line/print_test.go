@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-// TestPrint is to test the printing function
+// TestPrint is to test the printing function.
 func TestPrint(t *testing.T) {
 
 	tests := []struct {

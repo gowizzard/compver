@@ -6,8 +6,7 @@ import (
 	"testing"
 )
 
-// TestCore is to test the Core function
-// With table driven tests
+// TestCore is to test the Core function with table driven tests.
 func TestCore(t *testing.T) {
 
 	tests := []struct {
@@ -34,7 +33,7 @@ func TestCore(t *testing.T) {
 
 	for _, value := range tests {
 
-		number, err := statement.Core(&value.version, &value.block)
+		number, err := statement.Core(value.version, value.block)
 		if err != nil {
 			t.Fatal(err)
 		}

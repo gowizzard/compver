@@ -1,18 +1,21 @@
+// Package statement is used to execute the statements
+// for the command line interface. A return value is always
+// used so that it can be output or further processed.
 package statement
 
 import (
 	"github.com/gowizzard/compver/v3/version_core"
 )
 
-// Compare is to compare the versions & return the result
-func Compare(version1, version2 *string) (string, error) {
+// Compare is to compare the versions & return the result.
+func Compare(version1, version2 string) (string, error) {
 
-	core1, err := version_core.Split(*version1)
+	core1, err := version_core.Split(version1)
 	if err != nil {
 		return "", err
 	}
 
-	core2, err := version_core.Split(*version2)
+	core2, err := version_core.Split(version2)
 	if err != nil {
 		return "", err
 	}

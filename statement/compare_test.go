@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-// TestCompare is to test the Compare function
+// TestCompare is to test the Compare function.
 func TestCompare(t *testing.T) {
 
 	tests := []struct {
@@ -48,7 +48,7 @@ func TestCompare(t *testing.T) {
 
 	for _, value := range tests {
 
-		compare, err := statement.Compare(&value.version1, &value.version2)
+		compare, err := statement.Compare(value.version1, value.version2)
 		if err != nil {
 			t.Fatal(err)
 		}

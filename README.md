@@ -1,10 +1,16 @@
+<div align="center">
+
+<img src="https://user-images.githubusercontent.com/30717818/190334331-e1aea304-eb4e-4848-9333-2a8156be26ba.svg" width="150">
+
 # CompVer
 
 [![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/gowizzard/compver.svg)](https://golang.org/) [![Go](https://github.com/gowizzard/compver/actions/workflows/go.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/go.yml) [![CodeQL](https://github.com/gowizzard/compver/actions/workflows/codeql.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/codeql.yml) [![CompVer](https://github.com/gowizzard/compver/actions/workflows/compver.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/compver.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/gowizzard/compver/v3)](https://goreportcard.com/report/github.com/gowizzard/compver/v3) [![GitHub issues](https://img.shields.io/github/issues/gowizzard/compver)](https://github.com/gowizzard/compver/issues) [![GitHub forks](https://img.shields.io/github/forks/gowizzard/compver)](https://github.com/gowizzard/compver/network) [![GitHub stars](https://img.shields.io/github/stars/gowizzard/compver)](https://github.com/gowizzard/compver/stargazers) [![GitHub license](https://img.shields.io/github/license/gowizzard/compver)](https://github.com/gowizzard/compver/blob/master/LICENSE)
 
+</div>
+
 With this small cli tool, you can compare two versions with each other. **Currently, it is important to know that we only compare the version core `x.y.z`.** This means that currently the pre-releases and the meta information are not taken into account.
 
-Our version specifications are based on semantic versioning. [Here](https://semver.org/) you can find the corresponding definition. So that major, minor and patch can be read correctly, we use regex. You can find [here](https://regex101.com/r/un81dE/4) at regex101 once the used expression. We made sure that we can read versions with a preceding `v` as well.
+Our version specifications are based on semantic versioning. [Here](https://semver.org/) you can find the corresponding definition. So that major, minor and patch can be read correctly, we use regex. You can find [here](https://regex101.com/r/un81dE/4) at regex101 once the used expression. We made sure that we can read versions with a preceding `v` as well, even though we know it's not part of semantic versioning. [Here](https://semver.org/#is-v123-a-semantic-version) you can find an explanation in the faq on the [semver.org](https://semver.org/) website.
 
 ## Installation
 
@@ -79,7 +85,7 @@ jobs:
 
       - name: Get the major version
         id: compver
-        uses: gowizzard/compver@v3.1.2
+        uses: gowizzard/compver@v3.3.0
         with:
           args: "-core -block major -version1 ${{ steps.information.outputs.tag }}"
 
@@ -91,7 +97,7 @@ jobs:
       - name: Merge data from default branch
         run: |
           git fetch
-          git checkout v${{ steps.compver.outputs.number }}
+          git checkout v${{ steps.compver.outputs.core_number }}
           git pull
           git merge --no-ff "origin/$DEFAULT_BRANCH" -m "$COMMIT_MESSAGE"
           git push
