@@ -1,3 +1,5 @@
+// Package command_line is to print data to the command line interface.
+// The package contains functions to ensure the output in the console and the exit it.
 package command_line
 
 import (

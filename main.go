@@ -1,3 +1,5 @@
+// Package main is used for reading and checking the tags also the
+// different statements are called over it and the return value is passed on.
 package main
 
 import (

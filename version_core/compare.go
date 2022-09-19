@@ -1,3 +1,7 @@
+// Package version_core is used for the functions around the
+// core blocks of a function. With regex the different core
+// blocks like major, minor and patch are captured also the
+// different blocks are compared.
 package version_core
 
 // Compare is to check the different version core blocks

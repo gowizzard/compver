@@ -1,3 +1,6 @@
+// Package statement is used to execute the statements
+// for the command line interface. A return value is always
+// used so that it can be output or further processed.
 package statement
 
 import (
