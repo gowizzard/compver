@@ -34,7 +34,7 @@ func TestCore(t *testing.T) {
 
 	for _, value := range tests {
 
-		number, err := statement.Core(&value.version, &value.block)
+		number, err := statement.Core(value.version, value.block)
 		if err != nil {
 			t.Fatal(err)
 		}
