@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-// TestOutput is to test the output function
+// TestOutput is to test the output function.
 func TestOutput(t *testing.T) {
 
 	tests := []struct {
