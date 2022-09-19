@@ -19,8 +19,7 @@ var (
 	action                    = os.Getenv("GITHUB_ACTIONS") == "true"
 )
 
-// init is to parse the versions from the flags
-// And check all visited flags
+// init is to parse the versions from the flags and check all visited flags.
 func init() {
 
 	flag.BoolVar(&version, "version", false, "Get the current version")
@@ -38,8 +37,8 @@ func init() {
 
 }
 
-// main is to check the flags from the cli
-// And execute the statements or return the no statement message
+// main is to check the flags from the command line interface
+// and execute the statements or return the no statement message.
 func main() {
 
 	if version {

@@ -2,7 +2,7 @@
 // process. The variables are stored as public variables.
 package build_information
 
-// Version is to save the git tag from makefile
+// Version is to save the git tag from makefile.
 var (
 	Version string
 )

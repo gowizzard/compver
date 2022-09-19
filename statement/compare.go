@@ -7,7 +7,7 @@ import (
 	"github.com/gowizzard/compver/v3/version_core"
 )
 
-// Compare is to compare the versions & return the result
+// Compare is to compare the versions & return the result.
 func Compare(version1, version2 string) (string, error) {
 
 	core1, err := version_core.Split(version1)

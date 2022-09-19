@@ -5,7 +5,7 @@ package convert
 
 import "strconv"
 
-// Integer is to convert a string to an integer
+// Integer is to convert a string to an integer.
 func Integer(value string) int {
 
 	integer, err := strconv.Atoi(value)

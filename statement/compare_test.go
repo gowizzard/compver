@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-// TestCompare is to test the Compare function
+// TestCompare is to test the Compare function.
 func TestCompare(t *testing.T) {
 
 	tests := []struct {

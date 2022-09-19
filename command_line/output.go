@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-// Output is to build the attribute output
+// Output is to build the attribute output.
 func Output(attributes map[string]any) {
 
 	var build []byte

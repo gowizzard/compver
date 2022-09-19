@@ -6,8 +6,7 @@ import (
 	"testing"
 )
 
-// TestCore is to test the Core function
-// With table driven tests
+// TestCore is to test the Core function with table driven tests.
 func TestCore(t *testing.T) {
 
 	tests := []struct {

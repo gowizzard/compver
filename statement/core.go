@@ -2,7 +2,7 @@ package statement
 
 import "github.com/gowizzard/compver/v3/version_core"
 
-// Core is to get a core number as result
+// Core is to get the version number, split it to core block and return them.
 func Core(version, block string) (int, error) {
 
 	core, err := version_core.Split(version)

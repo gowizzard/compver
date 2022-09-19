@@ -5,12 +5,11 @@ import (
 	"regexp"
 )
 
-// regex is to save the compiled expression
+// regex is to save the compiled expression.
 var regex = regexp.MustCompile(`(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)`)
 
-// Split is to check the given version as a string
-// The function checks the string with regex
-// And split the value in major, minor and patch
+// Split is to check the given version as a string. The function checks
+// the string with regex and split the value in major, minor and patch.
 func Split(version string) (Core, error) {
 
 	core := Core{
