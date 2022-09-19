@@ -11,8 +11,8 @@ import (
 // version, compare, core is to save the boolean for the compare statement
 // version1, version2 is to save the version numbers from the flags
 var (
-	version, compare, core    *bool
-	version1, version2, block *string
+	version, compare, core    bool
+	version1, version2, block string
 	visit                     = make(map[string]bool)
 	action                    = os.Getenv("GITHUB_ACTIONS") == "true"
 )
@@ -21,12 +21,12 @@ var (
 // And check all visited flags
 func init() {
 
-	version = flag.Bool("version", false, "Get the current version")
-	compare = flag.Bool("compare", false, "Set the statement to compare the version numbers")
-	core = flag.Bool("core", false, "Set the statement to get a block from version core")
-	version1 = flag.String("version1", "1.1.0", "Set the first version number")
-	version2 = flag.String("version2", "1.0.5", "Set the second version number")
-	block = flag.String("block", "major", "Set the desired block")
+	flag.BoolVar(&version, "version", false, "Get the current version")
+	flag.BoolVar(&compare, "compare", false, "Set the statement to compare the version numbers")
+	flag.BoolVar(&core, "core", false, "Set the statement to get a block from version core")
+	flag.StringVar(&version1, "version1", "1.1.0", "Set the first version number")
+	flag.StringVar(&version2, "version2", "1.0.5", "Set the second version number")
+	flag.StringVar(&block, "block", "major", "Set the desired block")
 
 	flag.Parse()
 
@@ -40,11 +40,11 @@ func init() {
 // And execute the statements or return the no statement message
 func main() {
 
-	if *version {
+	if version {
 		command_line.Print(0, "version: %s\n", build_information.Version)
 	}
 
-	if *compare && visit["version1"] && visit["version2"] {
+	if compare && visit["version1"] && visit["version2"] {
 
 		result, err := statement.Compare(version1, version2)
 		if err != nil {
@@ -60,7 +60,7 @@ func main() {
 
 	}
 
-	if *core && visit["version1"] {
+	if core && visit["version1"] {
 
 		number, err := statement.Core(version1, block)
 		if err != nil {

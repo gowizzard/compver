@@ -22,8 +22,15 @@ test-build:
 	go build ${LDFLAGS} -o /usr/local/bin/${BINARY_NAME}-testing
 	chmod +x /usr/local/bin/${BINARY_NAME}-testing
 
+test-run:
+	${BINARY_NAME}-testing -version
+	${BINARY_NAME}-testing -compare -version1 v1.2.0 -version2 v1.2.5
+	${BINARY_NAME}-testing -core -block minor -version1 v1.11.0
+
 test-remove:
 	rm /usr/local/bin/${BINARY_NAME}-testing
+
+test-all: test-build test-run test-remove
 
 build:
 	go build ${LDFLAGS} -o ${BINARY_NAME}
