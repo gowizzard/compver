@@ -15,6 +15,9 @@ test:
 lint:
 	golangci-lint run ./...
 
+doc:
+	godoc -http=:6060 -goroot=/usr/local/go
+
 version:
 	@echo "version: ${GIT_TAG}"
 
