@@ -77,6 +77,6 @@ func main() {
 
 	}
 
-	command_line.Print(1, "Error! No statement flags were specified.\n")
+	command_line.Print(1, "no statement flags were specified\n")
 
 }

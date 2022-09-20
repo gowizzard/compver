@@ -1,6 +1,7 @@
 package version_core
 
 import (
+	"errors"
 	"github.com/gowizzard/compver/v3/convert"
 	"regexp"
 )
@@ -16,6 +17,10 @@ func Split(version string) (Core, error) {
 		Major: 0,
 		Minor: 0,
 		Patch: 0,
+	}
+
+	if !regex.Match([]byte(version)) {
+		return core, errors.New("it is not a version number")
 	}
 
 	match := regex.FindStringSubmatch(version)
