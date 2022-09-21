@@ -1,3 +1,7 @@
+// Copyright 2022 Jonas Kwiedor. All rights reserved.
+// Use of this source code is governed by the MIT
+// license that can be found in the LICENSE file.
+
 // Package main is used for reading and checking the tags also the
 // different statements are called over it and the return value is passed on.
 package main

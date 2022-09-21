@@ -1,3 +1,7 @@
+// Copyright 2022 Jonas Kwiedor. All rights reserved.
+// Use of this source code is governed by the MIT
+// license that can be found in the LICENSE file.
+
 // Package statement is used to execute the statements
 // for the command line interface. A return value is always
 // used so that it can be output or further processed.
