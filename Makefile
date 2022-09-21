@@ -16,7 +16,7 @@ lint:
 	@golangci-lint run ./...
 
 doc:
-	@godoc -http=:6060 -goroot=/usr/local/go
+	@godoc -play=true -goroot=/usr/local/go -http=:6060
 
 version:
 	@echo "version: ${GIT_TAG}"
