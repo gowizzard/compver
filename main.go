@@ -16,6 +16,8 @@ import (
 
 // version, compare, core is to save the boolean for the compare statement
 // version1, version2 is to save the version numbers from the flags
+// visit is to stored the specified flags as a positive value
+// action checks if it is a GitHub action
 var (
 	version, compare, core    bool
 	version1, version2, block string
