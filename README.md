@@ -8,9 +8,9 @@
 
 </div>
 
-With this small cli tool, you can compare two versions with each other. **Currently, it is important to know that we only compare the version core `x.y.z`.** This means that currently the pre-releases and the meta information are not taken into account.
+With this small cli tool, you can compare two versions with each other. Or perform other operations around the version number. **Currently, it is important to know that we only compare the version core `x.y.z`.** This means that currently the pre-releases and the meta information are not taken into account.
 
-Our version specifications are based on semantic versioning. [Here](https://semver.org/) you can find the corresponding definition. So that major, minor and patch can be read correctly, we use regex. You can find [here](https://regex101.com/r/un81dE/4) at regex101 once the used expression. We made sure that we can read versions with a preceding `v` as well, even though we know it's not part of semantic versioning. [Here](https://semver.org/#is-v123-a-semantic-version) you can find an explanation in the faq on the [semver.org](https://semver.org/) website.
+Our version specifications are based on semantic versioning. [Here](https://semver.org/) you can find the corresponding definition. So that major, minor and patch can be read correctly, we use regex. You can find [here](https://regex101.com/r/un81dE/4) at regex101 once the used expression. We made sure that we can read versions with a preceding `v` as well, even though we know it's not part of semantic versioning. [Here](https://semver.org/#is-v123-a-semantic-version) you can find an explanation in the faq on the [semver.org](https://semver.org/) website. Let's see it as a small feature for languages like golang, or any other where package versions have a `v` suffix.
 
 ## Installation
 
