@@ -1,4 +1,4 @@
-# Here you can reformat, check or build the binary
+# Here you can reformat, check or build the binary.
 BINARY_NAME=compver
 GIT_TAG=$(shell git describe --tags --abbrev=0)
 LDFLAGS=-ldflags "-X 'github.com/gowizzard/${BINARY_NAME}/v3/build_information.Version=${GIT_TAG}'"
