@@ -1,7 +1,7 @@
-# With this file you can build the docker image
-# We load the language golang:alpine from docker hub load, change the workdir & build the application
-# After that we create a prodution image that based on alpine:latest
-# Copy the files from the build image & start the application
+# With this file you can build the docker image. We load the language
+# golang:alpine from docker hub load, change the workdir & build the
+# application. After that we create a prodution image that based on
+# alpine:latest. Copy the files from the build image & start the application
 FROM golang:alpine AS build
 
 RUN apk --no-cache add \
