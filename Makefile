@@ -57,3 +57,6 @@ docker-test-remove:
 	docker rm ${BINARY_NAME}-testing1 ${BINARY_NAME}-testing2
 
 docker-test-all: docker-test-build docker-test-run docker-test-stop docker-test-remove
+
+docker-build:
+	docker build -t ${BINARY_NAME}:${GIT_TAG} -t ${BINARY_NAME}:latest .
