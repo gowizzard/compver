@@ -59,4 +59,4 @@ docker-test-remove:
 docker-test-all: docker-test-build docker-test-run docker-test-stop docker-test-remove
 
 docker-build:
-	docker build -t ${BINARY_NAME}:${GIT_TAG} -t ${BINARY_NAME}:latest .
+	docker build -p -t gowizzard/${BINARY_NAME}:${GIT_TAG} -t gowizzard/${BINARY_NAME}:latest .
