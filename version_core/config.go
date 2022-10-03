@@ -4,11 +4,14 @@
 
 package version_core
 
-// Core is to save the version core as major, minor and patch.
+// Core is to save the version core as major, minor,
+// patch, prerelease & buildmetadata.
 type Core struct {
-	Major int
-	Minor int
-	Patch int
+	Major         int
+	Minor         int
+	Patch         int
+	Prerelease    string
+	Buildmetadata string
 }
 
 // Block is to save the version core blocks as a pair.
