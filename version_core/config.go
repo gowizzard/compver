@@ -1,10 +1,17 @@
+// Copyright 2022 Jonas Kwiedor. All rights reserved.
+// Use of this source code is governed by the MIT
+// license that can be found in the LICENSE file.
+
 package version_core
 
-// Core is to save the version core as major, minor and patch.
+// Core is to save the version core as major, minor,
+// patch, prerelease & buildmetadata.
 type Core struct {
-	Major int
-	Minor int
-	Patch int
+	Major         int
+	Minor         int
+	Patch         int
+	Prerelease    string
+	Buildmetadata string
 }
 
 // Block is to save the version core blocks as a pair.

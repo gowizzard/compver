@@ -1,3 +1,7 @@
+// Copyright 2022 Jonas Kwiedor. All rights reserved.
+// Use of this source code is governed by the MIT
+// license that can be found in the LICENSE file.
+
 package version_core
 
 import (
@@ -7,16 +11,18 @@ import (
 )
 
 // regex is to save the compiled expression.
-var regex = regexp.MustCompile(`(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)`)
+var regex = regexp.MustCompile(`(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z][0-9a-zA-Z-]*))*))?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?`)
 
 // Split is to check the given version as a string. The function checks
-// the string with regex and split the value in major, minor and patch.
+// the string with regex and split the value in major, minor, patch, prerelease & buildmetadata.
 func Split(version string) (Core, error) {
 
 	core := Core{
-		Major: 0,
-		Minor: 0,
-		Patch: 0,
+		Major:         0,
+		Minor:         0,
+		Patch:         0,
+		Prerelease:    "",
+		Buildmetadata: "",
 	}
 
 	if !regex.Match([]byte(version)) {
@@ -32,6 +38,10 @@ func Split(version string) (Core, error) {
 			core.Minor = convert.Integer(match[index])
 		case "patch":
 			core.Patch = convert.Integer(match[index])
+		case "prerelease":
+			core.Prerelease = match[index]
+		case "buildmetadata":
+			core.Buildmetadata = match[index]
 		}
 	}
 

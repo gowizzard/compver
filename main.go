@@ -1,3 +1,7 @@
+// Copyright 2022 Jonas Kwiedor. All rights reserved.
+// Use of this source code is governed by the MIT
+// license that can be found in the LICENSE file.
+
 // Package main is used for reading and checking the tags also the
 // different statements are called over it and the return value is passed on.
 package main
@@ -12,6 +16,8 @@ import (
 
 // version, compare, core is to save the boolean for the compare statement
 // version1, version2 is to save the version numbers from the flags
+// visit is to stored the specified flags as a positive value
+// action checks if it is a GitHub action
 var (
 	version, compare, core    bool
 	version1, version2, block string

@@ -1,19 +1,23 @@
-# Here you can reformat, check or build the binary
+# Here you can reformat, check or build the binary.
 BINARY_NAME=compver
 GIT_TAG=$(shell git describe --tags --abbrev=0)
 LDFLAGS=-ldflags "-X 'github.com/gowizzard/${BINARY_NAME}/v3/build_information.Version=${GIT_TAG}'"
+DOCKER_USERNAME=gowizzard
 
 fmt:
-	go fmt ./...
+	@go fmt ./...
 
 vet:
-	go vet ./...
+	@go vet ./...
 
 test:
-	go test ./...
+	@go test ./...
 
 lint:
-	golangci-lint run ./...
+	@golangci-lint run ./...
+
+doc:
+	@godoc -play=true -goroot=/usr/local/go -http=:6060
 
 version:
 	@echo "version: ${GIT_TAG}"
@@ -54,3 +58,6 @@ docker-test-remove:
 	docker rm ${BINARY_NAME}-testing1 ${BINARY_NAME}-testing2
 
 docker-test-all: docker-test-build docker-test-run docker-test-stop docker-test-remove
+
+docker-build:
+	docker build -p -t ${DOCKER_USERNAME}/${BINARY_NAME}:${GIT_TAG} -t ${DOCKER_USERNAME}/${BINARY_NAME}:latest .
