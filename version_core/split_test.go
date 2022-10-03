@@ -22,41 +22,51 @@ func TestSplit(t *testing.T) {
 		{
 			version: "v1.2.4",
 			expected: version_core.Core{
-				Major: 1,
-				Minor: 2,
-				Patch: 4,
+				Major:         1,
+				Minor:         2,
+				Patch:         4,
+				Prerelease:    "",
+				Buildmetadata: "",
 			},
 		},
 		{
 			version: "v1.11.8-beta.1",
 			expected: version_core.Core{
-				Major: 1,
-				Minor: 11,
-				Patch: 8,
+				Major:         1,
+				Minor:         11,
+				Patch:         8,
+				Prerelease:    "beta.1",
+				Buildmetadata: "",
 			},
 		},
 		{
 			version: "v3.7.0-alpha.2+testing-12345a",
 			expected: version_core.Core{
-				Major: 3,
-				Minor: 7,
-				Patch: 0,
+				Major:         3,
+				Minor:         7,
+				Patch:         0,
+				Prerelease:    "alpha.2",
+				Buildmetadata: "testing-12345a",
 			},
 		},
 		{
 			version: "3.34.7",
 			expected: version_core.Core{
-				Major: 3,
-				Minor: 34,
-				Patch: 7,
+				Major:         3,
+				Minor:         34,
+				Patch:         7,
+				Prerelease:    "",
+				Buildmetadata: "",
 			},
 		},
 		{
-			version: "0.12.0",
+			version: "0.12.0+meta",
 			expected: version_core.Core{
-				Major: 0,
-				Minor: 12,
-				Patch: 0,
+				Major:         0,
+				Minor:         12,
+				Patch:         0,
+				Prerelease:    "",
+				Buildmetadata: "meta",
 			},
 		},
 	}
@@ -69,26 +79,34 @@ func TestSplit(t *testing.T) {
 		}
 
 		numbers := []struct {
-			Number1 int
-			Number2 int
+			expected any
+			got      any
 		}{
 			{
-				Number1: value.expected.Major,
-				Number2: core.Major,
+				expected: value.expected.Major,
+				got:      core.Major,
 			},
 			{
-				Number1: value.expected.Minor,
-				Number2: core.Minor,
+				expected: value.expected.Minor,
+				got:      core.Minor,
 			},
 			{
-				Number1: value.expected.Patch,
-				Number2: core.Patch,
+				expected: value.expected.Patch,
+				got:      core.Patch,
+			},
+			{
+				expected: value.expected.Prerelease,
+				got:      core.Prerelease,
+			},
+			{
+				expected: value.expected.Buildmetadata,
+				got:      core.Buildmetadata,
 			},
 		}
 
 		for _, value := range numbers {
-			if !reflect.DeepEqual(value.Number1, value.Number2) {
-				t.Fatalf("expected: \"%d\", got \"%d\"", value.Number1, value.Number2)
+			if !reflect.DeepEqual(value.got, value.expected) {
+				t.Fatalf("expected: \"%d\", got \"%d\"", value.got, value.expected)
 			}
 		}
 
