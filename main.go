@@ -76,7 +76,7 @@ func main() {
 
 		switch {
 		case action:
-			command_line.Output(map[string]any{"core_number": result})
+			command_line.Output(map[string]any{"core_result": result})
 		default:
 			command_line.Print(0, "%v\n", result)
 		}
