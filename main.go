@@ -69,16 +69,16 @@ func main() {
 
 	if core && visit["version1"] {
 
-		number, err := statement.Core(version1, block)
+		result, err := statement.Core(version1, block)
 		if err != nil {
 			command_line.Print(1, "%s\n", err)
 		}
 
 		switch {
 		case action:
-			command_line.Output(map[string]any{"core_number": number})
+			command_line.Output(map[string]any{"core_result": result})
 		default:
-			command_line.Print(0, "%d\n", number)
+			command_line.Print(0, "%v\n", result)
 		}
 
 	}

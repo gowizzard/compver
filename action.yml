@@ -7,8 +7,8 @@ branding:
 outputs:
     compare_result:
         description: "Here you get the compare result."
-    core_number:
-        description: "Here you get the core number for the desired version core block."
+    core_result:
+        description: "Here you get the core result for the desired version core block."
 runs:
     using: "docker"
     image: "Dockerfile"

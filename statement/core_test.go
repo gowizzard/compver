@@ -16,7 +16,7 @@ func TestCore(t *testing.T) {
 	tests := []struct {
 		version  string
 		block    string
-		expected int
+		expected any
 	}{
 		{
 			version:  "v1.12.4",
@@ -29,21 +29,31 @@ func TestCore(t *testing.T) {
 			expected: 7,
 		},
 		{
-			version:  "v3.0.11-alpha.2+testing-12345a",
+			version:  "v3.0.11+testing-12345a",
 			block:    "patch",
 			expected: 11,
+		},
+		{
+			version:  "v2.0.0-alpha.2",
+			block:    "prerelease",
+			expected: "alpha.2",
+		},
+		{
+			version:  "v1.34.0-beta.1+meta",
+			block:    "buildmetadata",
+			expected: "meta",
 		},
 	}
 
 	for _, value := range tests {
 
-		number, err := statement.Core(value.version, value.block)
+		result, err := statement.Core(value.version, value.block)
 		if err != nil {
 			t.Fatal(err)
 		}
 
-		if !reflect.DeepEqual(value.expected, number) {
-			t.Fatalf("expected: \"%d\", got \"%d\"", value.expected, number)
+		if !reflect.DeepEqual(value.expected, result) {
+			t.Fatalf("expected: \"%d\", got \"%d\"", value.expected, result)
 		}
 
 	}

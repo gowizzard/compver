@@ -43,7 +43,7 @@ If this command is executed now, we get an information back, this can contain th
 
 ### Get version core block
 
-If you want to read a block of the version core, you can do this with the following command. You will receive the number of the block as an answer. You can read and return the blocks `major`, `minor` and `patch`.
+If you want to read a block of the version core, you can do this with the following command. You will receive the number of the block as an answer. You can read and return the blocks `major`, `minor`, `patch`, `prerelease` and `buildmetadata`.
 
 ```bash
 compver -core -block major -version1 <VERSION1>
@@ -85,7 +85,7 @@ jobs:
 
       - name: Get the major version
         id: compver
-        uses: gowizzard/compver@v3.3.0
+        uses: gowizzard/compver@v4.0.0
         with:
           args: "-core -block major -version1 ${{ steps.information.outputs.tag }}"
 
@@ -97,7 +97,7 @@ jobs:
       - name: Merge data from default branch
         run: |
           git fetch
-          git checkout v${{ steps.compver.outputs.core_number }}
+          git checkout v${{ steps.compver.outputs.core_result }}
           git pull
           git merge --no-ff "origin/$DEFAULT_BRANCH" -m "$COMMIT_MESSAGE"
           git push
