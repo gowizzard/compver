@@ -3,7 +3,7 @@ BINARY_NAME=compver
 GIT_TAG=$(shell git describe --tags --abbrev=0)
 VERSION=$(if $(GIT_TAG),$(GIT_TAG),unavailible)
 LDFLAGS=-ldflags "-X 'github.com/gowizzard/${BINARY_NAME}/v3/build_information.Version=${VERSION}'"
-DOCKER_USERNAME=gowizzard
+DOCKER_HUB_USERNAME=gowizzard
 
 fmt:
 	@go fmt ./...
@@ -61,7 +61,7 @@ docker-test-remove:
 docker-test-all: docker-test-build docker-test-run docker-test-stop docker-test-remove
 
 docker-build:
-	docker build -t ${DOCKER_USERNAME}/${BINARY_NAME}:${VERSION} -t ${DOCKER_USERNAME}/${BINARY_NAME}:latest .
+	docker build -t ${DOCKER_HUB_USERNAME}/${BINARY_NAME}:${VERSION} -t ${DOCKER_HUB_USERNAME}/${BINARY_NAME}:latest .
 
 docker-push:
-	docker push -a ${DOCKER_USERNAME}/${BINARY_NAME}
+	docker push -a ${DOCKER_HUB_USERNAME}/${BINARY_NAME}
