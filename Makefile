@@ -60,4 +60,7 @@ docker-test-remove:
 docker-test-all: docker-test-build docker-test-run docker-test-stop docker-test-remove
 
 docker-build:
-	docker build --push -t ${DOCKER_USERNAME}/${BINARY_NAME}:${GIT_TAG} -t ${DOCKER_USERNAME}/${BINARY_NAME}:latest .
+	docker build -t ${DOCKER_USERNAME}/${BINARY_NAME}:${GIT_TAG} -t ${DOCKER_USERNAME}/${BINARY_NAME}:latest .
+
+docker-push:
+	docker push -a ${DOCKER_USERNAME}/${BINARY_NAME}
