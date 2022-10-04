@@ -27,7 +27,7 @@ jobs:
 
       - name: Get the major version
         id: compver
-        uses: gowizzard/compver@v4.0.0
+        uses: gowizzard/compver@v4.1.0
         with:
           args: "-core -block major -version1 ${{ steps.information.outputs.tag }}"
 
