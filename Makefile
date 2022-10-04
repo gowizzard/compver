@@ -2,7 +2,7 @@
 BINARY_NAME=compver
 GIT_TAG=$(shell git describe --tags --abbrev=0)
 VERSION=$(if $(GIT_TAG),$(GIT_TAG),unavailible)
-LDFLAGS=-ldflags "-X 'github.com/gowizzard/${BINARY_NAME}/v3/build_information.Version=${VERSION}'"
+LDFLAGS=-ldflags "-X 'github.com/gowizzard/${BINARY_NAME}/v4/build_information.Version=${VERSION}'"
 DOCKER_HUB_USERNAME=gowizzard
 
 fmt:
