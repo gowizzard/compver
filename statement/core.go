@@ -4,7 +4,7 @@
 
 package statement
 
-import "github.com/gowizzard/compver/v3/version_core"
+import "github.com/gowizzard/compver/v4/version_core"
 
 // Core is to get the version number, split it to core block and return them.
 func Core(version, block string) (any, error) {

@@ -1,3 +1,3 @@
-module github.com/gowizzard/compver/v3
+module github.com/gowizzard/compver/v4
 
 go 1.19
