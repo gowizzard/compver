@@ -6,7 +6,7 @@ package version_core
 
 import (
 	"errors"
-	"github.com/gowizzard/compver/v3/convert"
+	"github.com/gowizzard/compver/v4/convert"
 	"regexp"
 )
 

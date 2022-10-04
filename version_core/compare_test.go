@@ -5,7 +5,7 @@
 package version_core_test
 
 import (
-	"github.com/gowizzard/compver/v3/version_core"
+	"github.com/gowizzard/compver/v4/version_core"
 	"reflect"
 	"testing"
 )

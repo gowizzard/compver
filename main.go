@@ -8,9 +8,9 @@ package main
 
 import (
 	"flag"
-	"github.com/gowizzard/compver/v3/build_information"
-	"github.com/gowizzard/compver/v3/command_line"
-	"github.com/gowizzard/compver/v3/statement"
+	"github.com/gowizzard/compver/v4/build_information"
+	"github.com/gowizzard/compver/v4/command_line"
+	"github.com/gowizzard/compver/v4/statement"
 	"os"
 )
 
