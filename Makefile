@@ -1,7 +1,8 @@
 # Here you can reformat, check or build the binary.
 BINARY_NAME=compver
 GIT_TAG=$(shell git describe --tags --abbrev=0)
-LDFLAGS=-ldflags "-X 'github.com/gowizzard/${BINARY_NAME}/v3/build_information.Version=${GIT_TAG}'"
+VERSION=$(if $(GIT_TAG),$(GIT_TAG),unavailible)
+LDFLAGS=-ldflags "-X 'github.com/gowizzard/${BINARY_NAME}/v3/build_information.Version=${VERSION}'"
 DOCKER_USERNAME=gowizzard
 
 fmt:
@@ -20,7 +21,7 @@ doc:
 	@godoc -play=true -goroot=/usr/local/go -http=:6060
 
 version:
-	@echo "version: ${GIT_TAG}"
+	@echo "version: ${VERSION}"
 
 test-build:
 	go build ${LDFLAGS} -o /usr/local/bin/${BINARY_NAME}-testing
@@ -60,4 +61,7 @@ docker-test-remove:
 docker-test-all: docker-test-build docker-test-run docker-test-stop docker-test-remove
 
 docker-build:
-	docker build --push -t ${DOCKER_USERNAME}/${BINARY_NAME}:${GIT_TAG} -t ${DOCKER_USERNAME}/${BINARY_NAME}:latest .
+	docker build -t ${DOCKER_USERNAME}/${BINARY_NAME}:${VERSION} -t ${DOCKER_USERNAME}/${BINARY_NAME}:latest .
+
+docker-push:
+	docker push -a ${DOCKER_USERNAME}/${BINARY_NAME}
