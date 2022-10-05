@@ -1,0 +1,51 @@
+name: Assets
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Clone repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Cross compile the binary
+        run: make cross-compile
+
+      - name: Upload Linux binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: build/cross-compile/compver-amd64-linux
+          asset_name: compver-amd64-linux
+          asset_content_type: application/x-binary
+
+      - name: Upload Darwin binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: build/cross-compile/compver-amd64-darwin
+          asset_name: compver-amd64-darwin
+          asset_content_type: application/x-binary
+
+      - name: Upload Windows binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: build/cross-compile/compver-amd64-windows.exe
+          asset_name: compver-amd64-windows.exe
+          asset_content_type: application/x-binary
