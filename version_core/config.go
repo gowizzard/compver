@@ -10,8 +10,8 @@ type Core struct {
 	Major         int
 	Minor         int
 	Patch         int
-	Prerelease    string
-	Buildmetadata string
+	PreRelease    string
+	BuildMetadata string
 }
 
 // Block is to save the version core blocks as a pair.

@@ -21,8 +21,8 @@ func Split(version string) (Core, error) {
 		Major:         0,
 		Minor:         0,
 		Patch:         0,
-		Prerelease:    "",
-		Buildmetadata: "",
+		PreRelease:    "",
+		BuildMetadata: "",
 	}
 
 	if !regex.Match([]byte(version)) {
@@ -39,9 +39,9 @@ func Split(version string) (Core, error) {
 		case "patch":
 			core.Patch = convert.Integer(match[index])
 		case "prerelease":
-			core.Prerelease = match[index]
+			core.PreRelease = match[index]
 		case "buildmetadata":
-			core.Buildmetadata = match[index]
+			core.BuildMetadata = match[index]
 		}
 	}
 
