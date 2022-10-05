@@ -23,8 +23,8 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
     
-      - name: Build Docker images
+      - name: Build Docker Image
         run: make docker-build
         
-      - name: Push Docker images
+      - name: Push Image to Docker Hub
         run: make docker-push
