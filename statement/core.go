@@ -23,9 +23,9 @@ func Core(version, block string) (any, error) {
 	case "patch":
 		result = core.Patch
 	case "prerelease":
-		result = core.Prerelease
+		result = core.PreRelease
 	case "buildmetadata":
-		result = core.Buildmetadata
+		result = core.BuildMetadata
 	}
 
 	return result, nil

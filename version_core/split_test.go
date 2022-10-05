@@ -25,8 +25,8 @@ func TestSplit(t *testing.T) {
 				Major:         1,
 				Minor:         2,
 				Patch:         4,
-				Prerelease:    "",
-				Buildmetadata: "",
+				PreRelease:    "",
+				BuildMetadata: "",
 			},
 		},
 		{
@@ -35,8 +35,8 @@ func TestSplit(t *testing.T) {
 				Major:         1,
 				Minor:         11,
 				Patch:         8,
-				Prerelease:    "beta.1",
-				Buildmetadata: "",
+				PreRelease:    "beta.1",
+				BuildMetadata: "",
 			},
 		},
 		{
@@ -45,8 +45,8 @@ func TestSplit(t *testing.T) {
 				Major:         3,
 				Minor:         7,
 				Patch:         0,
-				Prerelease:    "alpha.2",
-				Buildmetadata: "testing-12345a",
+				PreRelease:    "alpha.2",
+				BuildMetadata: "testing-12345a",
 			},
 		},
 		{
@@ -55,8 +55,8 @@ func TestSplit(t *testing.T) {
 				Major:         3,
 				Minor:         34,
 				Patch:         7,
-				Prerelease:    "",
-				Buildmetadata: "",
+				PreRelease:    "",
+				BuildMetadata: "",
 			},
 		},
 		{
@@ -65,8 +65,8 @@ func TestSplit(t *testing.T) {
 				Major:         0,
 				Minor:         12,
 				Patch:         0,
-				Prerelease:    "",
-				Buildmetadata: "meta",
+				PreRelease:    "",
+				BuildMetadata: "meta",
 			},
 		},
 	}
@@ -95,12 +95,12 @@ func TestSplit(t *testing.T) {
 				got:      core.Patch,
 			},
 			{
-				expected: value.expected.Prerelease,
-				got:      core.Prerelease,
+				expected: value.expected.PreRelease,
+				got:      core.PreRelease,
 			},
 			{
-				expected: value.expected.Buildmetadata,
-				got:      core.Buildmetadata,
+				expected: value.expected.BuildMetadata,
+				got:      core.BuildMetadata,
 			},
 		}
 
