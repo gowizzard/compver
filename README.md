@@ -79,13 +79,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set repository tag information
-        id: information
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - name: Get the major version
+        id: compver
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        uses: gowizzard/compver@v4.1.0
+        with:
+          args: "-core -block major -version1 ${{ github.ref_name }}"
 
       - name: Get the major version
         id: compver
-        uses: gowizzard/compver@v4.0.0
+        uses: gowizzard/compver@v4.1.0
         with:
           args: "-core -block major -version1 ${{ steps.information.outputs.tag }}"
 
