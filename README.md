@@ -83,15 +83,9 @@ jobs:
         id: compver
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        uses: gowizzard/compver@v4.1.0
+        uses: gowizzard/compver@v4.2.3
         with:
           args: "-core -block major -version1 ${{ github.ref_name }}"
-
-      - name: Get the major version
-        id: compver
-        uses: gowizzard/compver@v4.1.0
-        with:
-          args: "-core -block major -version1 ${{ steps.information.outputs.tag }}"
 
       - name: Set git config
         run: |
