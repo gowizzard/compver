@@ -1,5 +1,5 @@
 name: "CompVer"
-description: "Is used to get the major version number to merge into the version branch."
+description: "Is used to get the major block of the version core to merge changes into the version branch."
 author: "Jonas Kwiedor"
 branding:
     icon: "git-merge"
