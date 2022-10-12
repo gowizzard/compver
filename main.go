@@ -12,6 +12,7 @@ import (
 	"github.com/gowizzard/compver/v4/command_line"
 	"github.com/gowizzard/compver/v4/statement"
 	"os"
+	"reflect"
 )
 
 // version, compare, core is to save the boolean for the compare statement
@@ -72,6 +73,13 @@ func main() {
 		result, err := statement.Core(version1, block)
 		if err != nil {
 			command_line.Print(1, "%s\n", err)
+		}
+
+		switch result.(type) {
+		case string:
+			if reflect.ValueOf(result).Len() == 0 {
+				result = "not found"
+			}
 		}
 
 		switch {
