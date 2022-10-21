@@ -106,7 +106,7 @@ func TestSplit(t *testing.T) {
 
 		for _, value := range numbers {
 			if !reflect.DeepEqual(value.got, value.expected) {
-				t.Fatalf("expected: \"%d\", got \"%d\"", value.got, value.expected)
+				t.Errorf("expected: \"%d\", got \"%d\"", value.got, value.expected)
 			}
 		}
 

@@ -45,7 +45,7 @@ func TestInteger(t *testing.T) {
 		integer := convert.Integer(value.number)
 
 		if !reflect.DeepEqual(value.expected, integer) {
-			t.Fatalf("expected: \"%d\", got \"%d\"", value.expected, integer)
+			t.Errorf("expected: \"%d\", got \"%d\"", value.expected, integer)
 		}
 
 	}

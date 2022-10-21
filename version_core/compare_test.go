@@ -121,7 +121,7 @@ func TestCompare(t *testing.T) {
 		compare := version_core.Compare(blocks)
 
 		if !reflect.DeepEqual(value.expected, compare) {
-			t.Fatalf("expected: \"%s\", got \"%s\"", value.expected, compare)
+			t.Errorf("expected: \"%s\", got \"%s\"", value.expected, compare)
 		}
 
 	}

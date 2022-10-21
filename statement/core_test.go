@@ -49,11 +49,11 @@ func TestCore(t *testing.T) {
 
 		result, err := statement.Core(value.version, value.block)
 		if err != nil {
-			t.Fatal(err)
+			t.Error(err)
 		}
 
 		if !reflect.DeepEqual(value.expected, result) {
-			t.Fatalf("expected: \"%d\", got \"%d\"", value.expected, result)
+			t.Errorf("expected: \"%d\", got \"%d\"", value.expected, result)
 		}
 
 	}
