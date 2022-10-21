@@ -54,11 +54,11 @@ func TestCompare(t *testing.T) {
 
 		compare, err := statement.Compare(value.version1, value.version2)
 		if err != nil {
-			t.Fatal(err)
+			t.Error(err)
 		}
 
 		if !reflect.DeepEqual(value.expected, compare) {
-			t.Fatalf("expected: \"%s\", got \"%s\"", value.expected, compare)
+			t.Errorf("expected: \"%s\", got \"%s\"", value.expected, compare)
 		}
 
 	}
