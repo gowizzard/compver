@@ -13,9 +13,11 @@ import (
 func TestOutput(t *testing.T) {
 
 	tests := []struct {
+		name       string
 		attributes map[string]any
 	}{
 		{
+			name: "ATTRIBUTES=3",
 			attributes: map[string]any{
 				"major_number": 1,
 				"minor_number": 10,
@@ -23,6 +25,7 @@ func TestOutput(t *testing.T) {
 			},
 		},
 		{
+			name: "ATTRIBUTES=1",
 			attributes: map[string]any{
 				"compare": "major update",
 			},
@@ -30,7 +33,11 @@ func TestOutput(t *testing.T) {
 	}
 
 	for _, value := range tests {
-		command_line.Output(value.attributes)
+
+		t.Run(value.name, func(t *testing.T) {
+			command_line.Output(value.attributes)
+		})
+
 	}
 
 }

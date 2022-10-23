@@ -15,11 +15,13 @@ import (
 func TestCompare(t *testing.T) {
 
 	tests := []struct {
+		name     string
 		version1 version_core.Core
 		version2 version_core.Core
 		expected string
 	}{
 		{
+			name: "MAJOR=update",
 			version1: version_core.Core{
 				Major: 12,
 				Minor: 0,
@@ -33,6 +35,7 @@ func TestCompare(t *testing.T) {
 			expected: "major update",
 		},
 		{
+			name: "MAJOR=downgrade",
 			version1: version_core.Core{
 				Major: 3,
 				Minor: 34,
@@ -46,6 +49,7 @@ func TestCompare(t *testing.T) {
 			expected: "major downgrade",
 		},
 		{
+			name: "MINOR=update",
 			version1: version_core.Core{
 				Major: 1,
 				Minor: 3,
@@ -59,6 +63,7 @@ func TestCompare(t *testing.T) {
 			expected: "minor update",
 		},
 		{
+			name: "MINOR=downgrade",
 			version1: version_core.Core{
 				Major: 4,
 				Minor: 3,
@@ -72,6 +77,7 @@ func TestCompare(t *testing.T) {
 			expected: "minor downgrade",
 		},
 		{
+			name: "PATCH=update",
 			version1: version_core.Core{
 				Major: 1,
 				Minor: 19,
@@ -85,6 +91,7 @@ func TestCompare(t *testing.T) {
 			expected: "patch update",
 		},
 		{
+			name: "PATCH=downgrade",
 			version1: version_core.Core{
 				Major: 6,
 				Minor: 9,
@@ -101,28 +108,32 @@ func TestCompare(t *testing.T) {
 
 	for _, value := range tests {
 
-		var blocks []version_core.Block
-		blocks = append(
-			blocks, version_core.Block{
-				Name:    "major",
-				Number1: value.version1.Major,
-				Number2: value.version2.Major,
-			}, version_core.Block{
-				Name:    "minor",
-				Number1: value.version1.Minor,
-				Number2: value.version2.Minor,
-			}, version_core.Block{
-				Name:    "patch",
-				Number1: value.version1.Patch,
-				Number2: value.version2.Patch,
-			},
-		)
+		t.Run(value.name, func(t *testing.T) {
 
-		compare := version_core.Compare(blocks)
+			var blocks []version_core.Block
+			blocks = append(
+				blocks, version_core.Block{
+					Name:    "major",
+					Number1: value.version1.Major,
+					Number2: value.version2.Major,
+				}, version_core.Block{
+					Name:    "minor",
+					Number1: value.version1.Minor,
+					Number2: value.version2.Minor,
+				}, version_core.Block{
+					Name:    "patch",
+					Number1: value.version1.Patch,
+					Number2: value.version2.Patch,
+				},
+			)
 
-		if !reflect.DeepEqual(value.expected, compare) {
-			t.Errorf("expected: \"%s\", got \"%s\"", value.expected, compare)
-		}
+			compare := version_core.Compare(blocks)
+
+			if !reflect.DeepEqual(value.expected, compare) {
+				t.Errorf("expected: \"%s\", got \"%s\"", value.expected, compare)
+			}
+
+		})
 
 	}
 

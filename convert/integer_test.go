@@ -15,26 +15,32 @@ import (
 func TestInteger(t *testing.T) {
 
 	tests := []struct {
+		name     string
 		number   string
 		expected int
 	}{
 		{
+			name:     "NUMBER=5",
 			number:   "5",
 			expected: 5,
 		},
 		{
+			name:     "NUMBER=265",
 			number:   "265",
 			expected: 265,
 		},
 		{
+			name:     "NUMBER=78",
 			number:   "78",
 			expected: 78,
 		},
 		{
+			name:     "NUMBER=132",
 			number:   "132",
 			expected: 132,
 		},
 		{
+			name:     "NUMBER=25",
 			number:   "25",
 			expected: 25,
 		},
@@ -42,11 +48,15 @@ func TestInteger(t *testing.T) {
 
 	for _, value := range tests {
 
-		integer := convert.Integer(value.number)
+		t.Run(value.name, func(t *testing.T) {
 
-		if !reflect.DeepEqual(value.expected, integer) {
-			t.Errorf("expected: \"%d\", got \"%d\"", value.expected, integer)
-		}
+			integer := convert.Integer(value.number)
+
+			if !reflect.DeepEqual(value.expected, integer) {
+				t.Errorf("expected: \"%d\", got \"%d\"", value.expected, integer)
+			}
+
+		})
 
 	}
 

@@ -14,36 +14,43 @@ import (
 func TestCompare(t *testing.T) {
 
 	tests := []struct {
+		name     string
 		version1 string
 		version2 string
 		expected string
 	}{
 		{
+			name:     "MAJOR=update",
 			version1: "v2.0.0",
 			version2: "v1.3.15",
 			expected: "major update",
 		},
 		{
+			name:     "MAJOR=downgrade",
 			version1: "v1.4.0",
 			version2: "v2.3.15",
 			expected: "major downgrade",
 		},
 		{
+			name:     "MINOR=update",
 			version1: "v3.7.0-alpha.2+testing-12345a",
 			version2: "v3.6.35-beta.4",
 			expected: "minor update",
 		},
 		{
+			name:     "MINOR=downgrade",
 			version1: "5.64.4",
 			version2: "5.70.10",
 			expected: "minor downgrade",
 		},
 		{
+			name:     "PATCH=update",
 			version1: "v12.9.5",
 			version2: "v12.9.3",
 			expected: "patch update",
 		},
 		{
+			name:     "PATCH=downgrade",
 			version1: "v4.0.10",
 			version2: "v4.0.15",
 			expected: "patch downgrade",
@@ -52,14 +59,18 @@ func TestCompare(t *testing.T) {
 
 	for _, value := range tests {
 
-		compare, err := statement.Compare(value.version1, value.version2)
-		if err != nil {
-			t.Error(err)
-		}
+		t.Run(value.name, func(t *testing.T) {
 
-		if !reflect.DeepEqual(value.expected, compare) {
-			t.Errorf("expected: \"%s\", got \"%s\"", value.expected, compare)
-		}
+			compare, err := statement.Compare(value.version1, value.version2)
+			if err != nil {
+				t.Error(err)
+			}
+
+			if !reflect.DeepEqual(value.expected, compare) {
+				t.Errorf("expected: \"%s\", got \"%s\"", value.expected, compare)
+			}
+
+		})
 
 	}
 

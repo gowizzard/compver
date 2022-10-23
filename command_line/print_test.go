@@ -14,16 +14,19 @@ import (
 func TestPrint(t *testing.T) {
 
 	tests := []struct {
+		name   string
 		code   int
 		format string
 		a      any
 	}{
 		{
+			name:   "PRINT=information",
 			code:   0,
 			format: "%s\n",
 			a:      "major update",
 		},
 		{
+			name:   "PRINT=error",
 			code:   1,
 			format: "%s\n",
 			a:      errors.New("this is a testing error"),
@@ -31,7 +34,11 @@ func TestPrint(t *testing.T) {
 	}
 
 	for _, value := range tests {
-		command_line.Print(value.code, value.format, value.a)
+
+		t.Run(value.name, func(t *testing.T) {
+			command_line.Print(value.code, value.format, value.a)
+		})
+
 	}
 
 }
