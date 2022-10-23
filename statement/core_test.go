@@ -14,31 +14,37 @@ import (
 func TestCore(t *testing.T) {
 
 	tests := []struct {
+		name     string
 		version  string
 		block    string
 		expected any
 	}{
 		{
+			name:     "MAJOR=1",
 			version:  "v1.12.4",
 			block:    "major",
 			expected: 1,
 		},
 		{
+			name:     "MINOR=7",
 			version:  "4.7.0",
 			block:    "minor",
 			expected: 7,
 		},
 		{
+			name:     "PATCH=11",
 			version:  "v3.0.11+testing-12345a",
 			block:    "patch",
 			expected: 11,
 		},
 		{
+			name:     "PRERELEASE=alpha.2",
 			version:  "v2.0.0-alpha.2",
 			block:    "prerelease",
 			expected: "alpha.2",
 		},
 		{
+			name:     "BUILDMETADATA=meta",
 			version:  "v1.34.0-beta.1+meta",
 			block:    "buildmetadata",
 			expected: "meta",
@@ -47,14 +53,18 @@ func TestCore(t *testing.T) {
 
 	for _, value := range tests {
 
-		result, err := statement.Core(value.version, value.block)
-		if err != nil {
-			t.Error(err)
-		}
+		t.Run(value.name, func(t *testing.T) {
 
-		if !reflect.DeepEqual(value.expected, result) {
-			t.Errorf("expected: \"%d\", got \"%d\"", value.expected, result)
-		}
+			result, err := statement.Core(value.version, value.block)
+			if err != nil {
+				t.Error(err)
+			}
+
+			if !reflect.DeepEqual(value.expected, result) {
+				t.Errorf("expected: \"%d\", got \"%d\"", value.expected, result)
+			}
+
+		})
 
 	}
 

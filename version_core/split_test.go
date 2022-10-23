@@ -16,10 +16,12 @@ import (
 func TestSplit(t *testing.T) {
 
 	tests := []struct {
+		name     string
 		version  string
 		expected version_core.Core
 	}{
 		{
+			name:    "VERSION=v1.2.4",
 			version: "v1.2.4",
 			expected: version_core.Core{
 				Major:         1,
@@ -30,6 +32,7 @@ func TestSplit(t *testing.T) {
 			},
 		},
 		{
+			name:    "VERSION=v1.11.8-beta.1",
 			version: "v1.11.8-beta.1",
 			expected: version_core.Core{
 				Major:         1,
@@ -40,6 +43,7 @@ func TestSplit(t *testing.T) {
 			},
 		},
 		{
+			name:    "VERSION=v3.7.0-alpha.2+testing-12345a",
 			version: "v3.7.0-alpha.2+testing-12345a",
 			expected: version_core.Core{
 				Major:         3,
@@ -50,6 +54,7 @@ func TestSplit(t *testing.T) {
 			},
 		},
 		{
+			name:    "VERSION=3.34.7",
 			version: "3.34.7",
 			expected: version_core.Core{
 				Major:         3,
@@ -60,6 +65,7 @@ func TestSplit(t *testing.T) {
 			},
 		},
 		{
+			name:    "0.12.0+meta",
 			version: "0.12.0+meta",
 			expected: version_core.Core{
 				Major:         0,
@@ -73,42 +79,46 @@ func TestSplit(t *testing.T) {
 
 	for _, value := range tests {
 
-		core, err := version_core.Split(value.version)
-		if err != nil {
-			log.Fatalln(err)
-		}
+		t.Run(value.name, func(t *testing.T) {
 
-		numbers := []struct {
-			expected any
-			got      any
-		}{
-			{
-				expected: value.expected.Major,
-				got:      core.Major,
-			},
-			{
-				expected: value.expected.Minor,
-				got:      core.Minor,
-			},
-			{
-				expected: value.expected.Patch,
-				got:      core.Patch,
-			},
-			{
-				expected: value.expected.PreRelease,
-				got:      core.PreRelease,
-			},
-			{
-				expected: value.expected.BuildMetadata,
-				got:      core.BuildMetadata,
-			},
-		}
-
-		for _, value := range numbers {
-			if !reflect.DeepEqual(value.got, value.expected) {
-				t.Errorf("expected: \"%d\", got \"%d\"", value.got, value.expected)
+			core, err := version_core.Split(value.version)
+			if err != nil {
+				log.Fatalln(err)
 			}
-		}
+
+			numbers := []struct {
+				expected any
+				got      any
+			}{
+				{
+					expected: value.expected.Major,
+					got:      core.Major,
+				},
+				{
+					expected: value.expected.Minor,
+					got:      core.Minor,
+				},
+				{
+					expected: value.expected.Patch,
+					got:      core.Patch,
+				},
+				{
+					expected: value.expected.PreRelease,
+					got:      core.PreRelease,
+				},
+				{
+					expected: value.expected.BuildMetadata,
+					got:      core.BuildMetadata,
+				},
+			}
+
+			for _, value := range numbers {
+				if !reflect.DeepEqual(value.got, value.expected) {
+					t.Errorf("expected: \"%d\", got \"%d\"", value.got, value.expected)
+				}
+			}
+
+		})
 
 	}
 
