@@ -75,16 +75,9 @@ func main() {
 
 		switch {
 		case action:
-
-			err = command_line.Output("compare_result", result)
-			if err != nil {
-				command_line.Print(1, "%s\n", err)
-			}
-
+			command_line.Output("compare_result", result)
 		default:
-
 			command_line.Print(0, "%s\n", result)
-
 		}
 
 	}
@@ -105,16 +98,9 @@ func main() {
 
 		switch {
 		case action:
-
-			err = command_line.Output("core_result", result)
-			if err != nil {
-				command_line.Print(1, "%s\n", err)
-			}
-
+			command_line.Output("core_result", result)
 		default:
-
 			command_line.Print(0, "%v\n", result)
-
 		}
 
 	}
