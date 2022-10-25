@@ -8,9 +8,9 @@ package main
 
 import (
 	"flag"
-	"github.com/gowizzard/compver/v4/build_information"
-	"github.com/gowizzard/compver/v4/command_line"
-	"github.com/gowizzard/compver/v4/statement"
+	"github.com/gowizzard/compver/v5/build_information"
+	"github.com/gowizzard/compver/v5/command_line"
+	"github.com/gowizzard/compver/v5/statement"
 	"os"
 	"reflect"
 )
@@ -20,20 +20,22 @@ import (
 // visit is to store the specified flags as a positive value.
 // action checks if it is a GitHub action.
 var (
-	version, compare, core    bool
-	version1, version2, block string
-	visit                     = make(map[string]bool)
-	action                    = os.Getenv("GITHUB_ACTIONS") == "true"
+	version, trim, compare, core      bool
+	version1, version2, prefix, block string
+	visit                             = make(map[string]bool)
+	action                            = os.Getenv("GITHUB_ACTIONS") == "true"
 )
 
 // init is to parse the versions from the flags and check all visited flags.
 func init() {
 
 	flag.BoolVar(&version, "version", false, "Get the current version")
+	flag.BoolVar(&trim, "trim", false, "To trim the version prefix")
 	flag.BoolVar(&compare, "compare", false, "Set the statement to compare the version numbers")
 	flag.BoolVar(&core, "core", false, "Set the statement to get a block from version core")
 	flag.StringVar(&version1, "version1", "1.1.0", "Set the first version number")
 	flag.StringVar(&version2, "version2", "1.0.5", "Set the second version number")
+	flag.StringVar(&prefix, "prefix", "v", "Set the prefix to trim from the version number")
 	flag.StringVar(&block, "block", "major", "Set the desired block")
 
 	flag.Parse()
@@ -50,6 +52,18 @@ func main() {
 
 	if version {
 		command_line.Print(0, "version: %s\n", build_information.Version)
+	}
+
+	if trim && visit["prefix"] {
+
+		if visit["version1"] {
+			version1 = statement.Prefix(version1, prefix)
+		}
+
+		if visit["version2"] {
+			version2 = statement.Prefix(version2, prefix)
+		}
+
 	}
 
 	if compare && visit["version1"] && visit["version2"] {

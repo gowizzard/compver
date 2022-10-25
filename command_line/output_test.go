@@ -5,7 +5,7 @@
 package command_line_test
 
 import (
-	"github.com/gowizzard/compver/v4/command_line"
+	"github.com/gowizzard/compver/v5/command_line"
 	"testing"
 )
 

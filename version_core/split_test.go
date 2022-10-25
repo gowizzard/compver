@@ -5,7 +5,7 @@
 package version_core_test
 
 import (
-	"github.com/gowizzard/compver/v4/version_core"
+	"github.com/gowizzard/compver/v5/version_core"
 	"log"
 	"reflect"
 	"testing"
@@ -21,8 +21,8 @@ func TestSplit(t *testing.T) {
 		expected version_core.Core
 	}{
 		{
-			name:    "VERSION=v1.2.4",
-			version: "v1.2.4",
+			name:    "VERSION=1.2.4",
+			version: "1.2.4",
 			expected: version_core.Core{
 				Major:         1,
 				Minor:         2,
@@ -32,8 +32,8 @@ func TestSplit(t *testing.T) {
 			},
 		},
 		{
-			name:    "VERSION=v1.11.8-beta.1",
-			version: "v1.11.8-beta.1",
+			name:    "VERSION=1.11.8-beta.1",
+			version: "1.11.8-beta.1",
 			expected: version_core.Core{
 				Major:         1,
 				Minor:         11,
@@ -43,8 +43,8 @@ func TestSplit(t *testing.T) {
 			},
 		},
 		{
-			name:    "VERSION=v3.7.0-alpha.2+testing-12345a",
-			version: "v3.7.0-alpha.2+testing-12345a",
+			name:    "VERSION=3.7.0-alpha.2+testing-12345a",
+			version: "3.7.0-alpha.2+testing-12345a",
 			expected: version_core.Core{
 				Major:         3,
 				Minor:         7,

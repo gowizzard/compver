@@ -6,12 +6,12 @@ package version_core
 
 import (
 	"errors"
-	"github.com/gowizzard/compver/v4/convert"
+	"github.com/gowizzard/compver/v5/convert"
 	"regexp"
 )
 
 // regex is to save the compiled expression.
-var regex = regexp.MustCompile(`(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z][0-9a-zA-Z-]*))*))?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?`)
+var regex = regexp.MustCompile(`^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z][0-9a-zA-Z-]*))*))?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$`)
 
 // Split is to check the given version as a string. The function checks
 // the string with regex and split the value in major, minor, patch, prerelease & buildmetadata.
@@ -26,7 +26,7 @@ func Split(version string) (Core, error) {
 	}
 
 	if !regex.Match([]byte(version)) {
-		return core, errors.New("it is not a version number")
+		return core, errors.New("it is not a semantic version number")
 	}
 
 	match := regex.FindStringSubmatch(version)
