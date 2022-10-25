@@ -32,7 +32,12 @@ func TestOutput(t *testing.T) {
 	for _, value := range tests {
 
 		t.Run(value.name, func(t *testing.T) {
-			command_line.Output(value.key, value.value)
+
+			err := command_line.Output(value.key, value.value)
+			if err != nil {
+				t.Error(err)
+			}
+
 		})
 
 	}
