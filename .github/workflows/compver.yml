@@ -25,9 +25,9 @@ jobs:
         id: compver
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        uses: gowizzard/compver@v4.2.3
+        uses: gowizzard/compver@v5.0.0
         with:
-          args: "-core -block major -version1 ${{ github.ref_name }}"
+          args: "-core -block major -version1 ${{ github.ref_name }} -trim -prefix v"
 
       - name: Set git config
         run: |

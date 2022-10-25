@@ -5,7 +5,7 @@
 package statement_test
 
 import (
-	"github.com/gowizzard/compver/v4/statement"
+	"github.com/gowizzard/compver/v5/statement"
 	"reflect"
 	"testing"
 )
@@ -21,7 +21,7 @@ func TestCore(t *testing.T) {
 	}{
 		{
 			name:     "MAJOR=1",
-			version:  "v1.12.4",
+			version:  "1.12.4",
 			block:    "major",
 			expected: 1,
 		},
@@ -33,19 +33,19 @@ func TestCore(t *testing.T) {
 		},
 		{
 			name:     "PATCH=11",
-			version:  "v3.0.11+testing-12345a",
+			version:  "3.0.11+testing-12345a",
 			block:    "patch",
 			expected: 11,
 		},
 		{
 			name:     "PRERELEASE=alpha.2",
-			version:  "v2.0.0-alpha.2",
+			version:  "2.0.0-alpha.2",
 			block:    "prerelease",
 			expected: "alpha.2",
 		},
 		{
 			name:     "BUILDMETADATA=meta",
-			version:  "v1.34.0-beta.1+meta",
+			version:  "1.34.0-beta.1+meta",
 			block:    "buildmetadata",
 			expected: "meta",
 		},
