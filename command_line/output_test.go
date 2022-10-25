@@ -13,29 +13,26 @@ import (
 func TestOutput(t *testing.T) {
 
 	tests := []struct {
-		name       string
-		attributes map[string]any
+		name  string
+		key   string
+		value any
 	}{
 		{
-			name: "ATTRIBUTES=3",
-			attributes: map[string]any{
-				"major_number": 1,
-				"minor_number": 10,
-				"patch_number": 1,
-			},
+			name:  "KEY=compare_result",
+			key:   "compare_result",
+			value: "major update",
 		},
 		{
-			name: "ATTRIBUTES=1",
-			attributes: map[string]any{
-				"compare": "major update",
-			},
+			name:  "KEY=core_result",
+			key:   "core_result",
+			value: 5,
 		},
 	}
 
 	for _, value := range tests {
 
 		t.Run(value.name, func(t *testing.T) {
-			command_line.Output(value.attributes)
+			command_line.Output(value.key, value.value)
 		})
 
 	}
