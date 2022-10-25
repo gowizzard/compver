@@ -75,7 +75,7 @@ func main() {
 
 		switch {
 		case action:
-			command_line.Output(map[string]any{"compare_result": result})
+			command_line.Output("compare_result", result)
 		default:
 			command_line.Print(0, "%s\n", result)
 		}
@@ -98,7 +98,7 @@ func main() {
 
 		switch {
 		case action:
-			command_line.Output(map[string]any{"core_result": result})
+			command_line.Output("core_result", result)
 		default:
 			command_line.Print(0, "%v\n", result)
 		}

@@ -13,15 +13,10 @@ import (
 	"os"
 )
 
-// Output is to build the attribute output.
-func Output(attributes map[string]any) {
+// Output is to build the github action output.
+func Output(key string, value any) {
 
-	var build []byte
-	for index, value := range attributes {
-		build = fmt.Append(build, "::set-output")
-		build = fmt.Appendf(build, " name=%s::%v\n", index, value)
-	}
-	fmt.Printf("%s", build)
+	fmt.Printf("%s=%v >> $GITHUB_OUTPUT\n", key, value)
 
 	if flag.Lookup("test.v") == nil {
 		defer os.Exit(0)
