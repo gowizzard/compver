@@ -91,7 +91,7 @@ jobs:
         id: compver
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        uses: gowizzard/compver@v5.1.2
+        uses: gowizzard/compver@v5.1.3
         with:
           args: "-core -block major -version1 ${{ github.ref_name }} -trim -prefix v"
 
@@ -103,7 +103,7 @@ jobs:
       - name: Merge data from default branch
         run: |
           git fetch
-          git checkout v${{ needs.compver.outputs.core_result }}
+          git checkout v${{ steps.compver.outputs.core_result }}
           git pull
           git merge --no-ff "origin/$DEFAULT_BRANCH" -m "$COMMIT_MESSAGE"
           git push
