@@ -103,7 +103,7 @@ jobs:
       - name: Merge data from default branch
         run: |
           git fetch
-          git checkout v${{ steps.compver.outputs.core_result }}
+          git checkout v${{ needs.compver.outputs.core_result }}
           git pull
           git merge --no-ff "origin/$DEFAULT_BRANCH" -m "$COMMIT_MESSAGE"
           git push
