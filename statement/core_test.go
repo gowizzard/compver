@@ -5,7 +5,7 @@
 package statement_test
 
 import (
-	"github.com/gowizzard/compver/v4/statement"
+	"github.com/gowizzard/compver/v5/statement"
 	"reflect"
 	"testing"
 )

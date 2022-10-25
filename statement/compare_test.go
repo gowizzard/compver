@@ -5,7 +5,7 @@
 package statement_test
 
 import (
-	"github.com/gowizzard/compver/v4/statement"
+	"github.com/gowizzard/compver/v5/statement"
 	"reflect"
 	"testing"
 )
@@ -21,20 +21,20 @@ func TestCompare(t *testing.T) {
 	}{
 		{
 			name:     "MAJOR=update",
-			version1: "v2.0.0",
-			version2: "v1.3.15",
+			version1: "2.0.0",
+			version2: "1.3.15",
 			expected: "major update",
 		},
 		{
 			name:     "MAJOR=downgrade",
-			version1: "v1.4.0",
-			version2: "v2.3.15",
+			version1: "1.4.0",
+			version2: "2.3.15",
 			expected: "major downgrade",
 		},
 		{
 			name:     "MINOR=update",
-			version1: "v3.7.0-alpha.2+testing-12345a",
-			version2: "v3.6.35-beta.4",
+			version1: "3.7.0-alpha.2+testing-12345a",
+			version2: "3.6.35-beta.4",
 			expected: "minor update",
 		},
 		{
@@ -45,14 +45,14 @@ func TestCompare(t *testing.T) {
 		},
 		{
 			name:     "PATCH=update",
-			version1: "v12.9.5",
-			version2: "v12.9.3",
+			version1: "12.9.5",
+			version2: "12.9.3",
 			expected: "patch update",
 		},
 		{
 			name:     "PATCH=downgrade",
-			version1: "v4.0.10",
-			version2: "v4.0.15",
+			version1: "4.0.10",
+			version2: "4.0.15",
 			expected: "patch downgrade",
 		},
 	}

@@ -5,7 +5,7 @@
 package convert_test
 
 import (
-	"github.com/gowizzard/compver/v4/convert"
+	"github.com/gowizzard/compver/v5/convert"
 	"reflect"
 	"testing"
 )
