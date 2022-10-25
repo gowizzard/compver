@@ -6,11 +6,11 @@
 
 </div>
 
-[![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/gowizzard/compver.svg)](https://golang.org/) [![Go](https://github.com/gowizzard/compver/actions/workflows/go.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/go.yml) [![Docker Image CI](https://github.com/gowizzard/compver/actions/workflows/docker-image.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/docker-image.yml) [![CodeQL](https://github.com/gowizzard/compver/actions/workflows/codeql.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/codeql.yml) [![CompVer](https://github.com/gowizzard/compver/actions/workflows/compver.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/compver.yml) [![Assets](https://github.com/gowizzard/compver/actions/workflows/assets.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/assets.yml) [![Docker Hub](https://github.com/gowizzard/compver/actions/workflows/docker-hub.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/docker-hub.yml) [![Go Reference](https://pkg.go.dev/badge/github.com/gowizzard/compver/v4.svg)](https://pkg.go.dev/github.com/gowizzard/compver/v4) [![Go Report Card](https://goreportcard.com/badge/github.com/gowizzard/compver/v4)](https://goreportcard.com/report/github.com/gowizzard/compver/v4) [![GitHub issues](https://img.shields.io/github/issues/gowizzard/compver)](https://github.com/gowizzard/compver/issues) [![GitHub forks](https://img.shields.io/github/forks/gowizzard/compver)](https://github.com/gowizzard/compver/network) [![GitHub stars](https://img.shields.io/github/stars/gowizzard/compver)](https://github.com/gowizzard/compver/stargazers) [![GitHub license](https://img.shields.io/github/license/gowizzard/compver)](https://github.com/gowizzard/compver/blob/master/LICENSE)
+[![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/gowizzard/compver.svg)](https://golang.org/) [![Go](https://github.com/gowizzard/compver/actions/workflows/go.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/go.yml) [![Docker Image CI](https://github.com/gowizzard/compver/actions/workflows/docker-image.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/docker-image.yml) [![CodeQL](https://github.com/gowizzard/compver/actions/workflows/codeql.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/codeql.yml) [![CompVer](https://github.com/gowizzard/compver/actions/workflows/compver.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/compver.yml) [![Assets](https://github.com/gowizzard/compver/actions/workflows/assets.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/assets.yml) [![Docker Hub](https://github.com/gowizzard/compver/actions/workflows/docker-hub.yml/badge.svg)](https://github.com/gowizzard/compver/actions/workflows/docker-hub.yml) [![Go Reference](https://pkg.go.dev/badge/github.com/gowizzard/compver/v5.svg)](https://pkg.go.dev/github.com/gowizzard/compver/v5) [![Go Report Card](https://goreportcard.com/badge/github.com/gowizzard/compver/v5)](https://goreportcard.com/report/github.com/gowizzard/compver/v5) [![GitHub issues](https://img.shields.io/github/issues/gowizzard/compver)](https://github.com/gowizzard/compver/issues) [![GitHub forks](https://img.shields.io/github/forks/gowizzard/compver)](https://github.com/gowizzard/compver/network) [![GitHub stars](https://img.shields.io/github/stars/gowizzard/compver)](https://github.com/gowizzard/compver/stargazers) [![GitHub license](https://img.shields.io/github/license/gowizzard/compver)](https://github.com/gowizzard/compver/blob/master/LICENSE)
 
-With this small cli tool, you can compare two versions with each other. Or perform other operations around the version number. **Currently, it is important to know that we only compare the version core `x.y.z`.** This means that currently the pre-releases and the meta information are not taken into account.
+With this small cli tool, you can compare two versions with each other. Or perform other operations around the version number. **Currently, it is important to know that we only compare the version core `x.y.z`.** This means that currently the pre-releases and the meta information are not taken into account. But you can read pre-releases and metadata from a version using our tool. For this you can use the core command.
 
-Our version specifications are based on semantic versioning. [Here](https://semver.org/) you can find the corresponding definition. So that major, minor and patch can be read correctly, we use regex. You can find [here](https://regex101.com/r/un81dE/4) at regex101 once the used expression. We made sure that we can read versions with a preceding `v` as well, even though we know it's not part of semantic versioning. [Here](https://semver.org/#is-v123-a-semantic-version) you can find an explanation in the faq on the [semver.org](https://semver.org/) website. Let's see it as a small feature for languages like golang, or any other where package versions have a `v` prefix.
+Our version specifications are based on semantic versioning. [Here](https://semver.org/) you can find the corresponding definition. So that major, minor and patch can be read correctly, we use regex. You can find [here](https://regex101.com/r/un81dE/5) at regex101 once the used expression. 
 
 ## Installation
 
@@ -49,6 +49,14 @@ If you want to read a block of the version core, you can do this with the follow
 compver -core -block major -version1 <VERSION1>
 ```
 
+### Trim prefix
+
+So that you can also read versions that do not directly correspond to the semantic versioning, we have added the trim function. So you can also read and compare a version with a preceding `v` by calling the prefix with the trim command as follows.
+
+```bash
+compver -core -block minor -version1 <VERSION1> -trim -prefix <PREFIX> 
+```
+
 ## Using the GitHub Action
 
 Here you can find an example if you want to use CompVer as a GitHub Action. In the example the action is only triggered when a new release is created.
@@ -83,9 +91,9 @@ jobs:
         id: compver
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        uses: gowizzard/compver@v4.2.3
+        uses: gowizzard/compver@v5
         with:
-          args: "-core -block major -version1 ${{ github.ref_name }}"
+          args: "-core -block major -version1 ${{ github.ref_name }} -trim -prefix v"
 
       - name: Set git config
         run: |
