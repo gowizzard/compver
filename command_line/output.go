@@ -11,19 +11,12 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"os/exec"
 )
 
 // Output is to build the github action output.
 func Output(key string, value any) {
 
-	output := fmt.Sprintf("\"%s=%v\" >> $GITHUB_OUTPUT", key, value)
-
-	command := exec.Command("echo", output)
-	err := command.Run()
-	if err != nil {
-		os.Exit(1)
-	}
+	fmt.Printf("\"%s=%v\" >> $GITHUB_OUTPUT", key, value)
 
 	if flag.Lookup("test.v") == nil {
 		defer os.Exit(0)
