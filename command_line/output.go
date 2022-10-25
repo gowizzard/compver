@@ -16,7 +16,7 @@ import (
 // Output is to build the github action output.
 func Output(key string, value any) {
 
-	fmt.Printf("%s=%v >> $GITHUB_OUTPUT\n", key, value)
+	fmt.Printf("\"%s=%v\" >> $GITHUB_OUTPUT\n", key, value)
 
 	if flag.Lookup("test.v") == nil {
 		defer os.Exit(0)
