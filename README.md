@@ -91,7 +91,7 @@ jobs:
         id: compver
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        uses: gowizzard/compver@v5.1.3
+        uses: gowizzard/compver@v5.2.0
         with:
           args: "-core -block major -version1 ${{ github.ref_name }} -trim -prefix v"
 
