@@ -10,6 +10,7 @@ import (
 	"flag"
 	"github.com/gowizzard/compver/v5/build_information"
 	"github.com/gowizzard/compver/v5/command_line"
+	"github.com/gowizzard/compver/v5/output"
 	"github.com/gowizzard/compver/v5/statement"
 	"os"
 	"reflect"
@@ -75,7 +76,7 @@ func main() {
 
 		switch {
 		case action:
-			command_line.Output(map[string]any{"compare_result": result})
+			output.Write("compare_result", result)
 		default:
 			command_line.Print(0, "%s\n", result)
 		}
@@ -98,7 +99,7 @@ func main() {
 
 		switch {
 		case action:
-			command_line.Output(map[string]any{"core_result": result})
+			output.Write("core_result", result)
 		default:
 			command_line.Print(0, "%v\n", result)
 		}
