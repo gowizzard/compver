@@ -16,7 +16,12 @@ import (
 // Output is to build the github action output.
 func Output(key string, value any) {
 
-	fmt.Printf("\"%s=%v\" >> $GITHUB_OUTPUT\n", key, value)
+	output := fmt.Sprintf("\"%s=%v\"", key, value)
+	err := os.Setenv("GITHUB_OUTPUT", output)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 
 	if flag.Lookup("test.v") == nil {
 		defer os.Exit(0)
