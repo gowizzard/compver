@@ -12,7 +12,7 @@ import (
 	"os"
 )
 
-// Write is to write a environment variable to the github output file.
+// Write is to write an environment variable to the github output file.
 func Write(key string, value any) {
 
 	path := os.Getenv("GITHUB_OUTPUT")
