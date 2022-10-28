@@ -42,3 +42,12 @@ func TestPrint(t *testing.T) {
 	}
 
 }
+
+// BenchmarkPrint is to test the Print function benchmark timing.
+func BenchmarkPrint(b *testing.B) {
+
+	for i := 0; i < b.N; i++ {
+		command_line.Print(0, "%s\n", "This is a benchmark test")
+	}
+
+}

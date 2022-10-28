@@ -69,3 +69,15 @@ func TestCore(t *testing.T) {
 	}
 
 }
+
+// BenchmarkCore is to test the Core function benchmark timing.
+func BenchmarkCore(b *testing.B) {
+
+	for i := 0; i < b.N; i++ {
+		_, err := statement.Core("3.5.0", "major")
+		if err != nil {
+			b.Error(err)
+		}
+	}
+
+}

@@ -138,3 +138,32 @@ func TestCompare(t *testing.T) {
 	}
 
 }
+
+// BenchmarkCompare is to test the Compare function benchmark timing.
+func BenchmarkCompare(b *testing.B) {
+
+	blocks := []version_core.Block{
+		{
+			Name:    "major",
+			Number1: 0,
+			Number2: 2,
+		},
+		{
+			Name:    "minor",
+			Number1: 13,
+			Number2: 0,
+		},
+		{
+			Name:    "patch",
+			Number1: 1,
+			Number2: 4,
+		},
+	}
+
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		_ = version_core.Compare(blocks)
+	}
+
+}

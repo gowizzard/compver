@@ -66,3 +66,12 @@ func TestPrefix(t *testing.T) {
 	}
 
 }
+
+// BenchmarkPrefix is to test the Prefix function benchmark timing.
+func BenchmarkPrefix(b *testing.B) {
+
+	for i := 0; i < b.N; i++ {
+		_ = statement.Prefix("v3.7.0-alpha.2+testing-12345a", "v")
+	}
+
+}
