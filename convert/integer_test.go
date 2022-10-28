@@ -61,3 +61,12 @@ func TestInteger(t *testing.T) {
 	}
 
 }
+
+// BenchmarkInteger is to test the Integer function benchmark timing.
+func BenchmarkInteger(b *testing.B) {
+
+	for i := 0; i < b.N; i++ {
+		_ = convert.Integer("14")
+	}
+
+}

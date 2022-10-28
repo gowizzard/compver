@@ -75,3 +75,15 @@ func TestCompare(t *testing.T) {
 	}
 
 }
+
+// BenchmarkCompare is to test the Compare function benchmark timing.
+func BenchmarkCompare(b *testing.B) {
+
+	for i := 0; i < b.N; i++ {
+		_, err := statement.Compare("1.5.0", "2.4.4")
+		if err != nil {
+			b.Error(err)
+		}
+	}
+
+}
