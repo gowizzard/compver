@@ -1,8 +1,9 @@
 # Here you can reformat, check or build the binary.
 BINARY_NAME=compver
+LIST=$(shell go list)
 GIT_TAG=$(shell git describe --tags --abbrev=0)
 VERSION=$(if $(GIT_TAG),$(GIT_TAG),unavailible)
-LDFLAGS=-ldflags "-X 'github.com/gowizzard/${BINARY_NAME}/v5/build_information.Version=${VERSION}'"
+LDFLAGS=-ldflags "-X '${LIST}/build_information.Version=${VERSION}'"
 DOCKER_HUB_USERNAME=gowizzard
 
 fmt:
