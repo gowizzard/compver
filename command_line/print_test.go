@@ -42,3 +42,22 @@ func TestPrint(t *testing.T) {
 	}
 
 }
+
+// BenchmarkPrint is to test the Print function benchmark timing.
+func BenchmarkPrint(b *testing.B) {
+
+	for i := 0; i < b.N; i++ {
+		command_line.Print(0, "%s\n", "This is a benchmark test")
+	}
+
+}
+
+// FuzzPrint is to test the Print function with fuzz testing.
+func FuzzPrint(f *testing.F) {
+
+	f.Add(0, "%s\n", "This is a fuzz test")
+	f.Fuzz(func(t *testing.T, i int, s1, s2 string) {
+		command_line.Print(i, s1, s2)
+	})
+
+}

@@ -82,3 +82,48 @@ func TestWrite(t *testing.T) {
 	}
 
 }
+
+// BenchmarkWrite is to test the Write function benchmark timing.
+func BenchmarkWrite(b *testing.B) {
+
+	path := filepath.Join(os.TempDir(), "benchmark_data")
+
+	err := os.WriteFile(path, []byte{}, os.ModePerm)
+	if err != nil {
+		b.Error(err)
+	}
+
+	err = os.Setenv("GITHUB_OUTPUT", path)
+	if err != nil {
+		b.Error(err)
+	}
+
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		output.Write("BENCHMARK_TEST", true)
+	}
+
+}
+
+// FuzzWrite is to test the Write function with fuzz testing.
+func FuzzWrite(f *testing.F) {
+
+	path := filepath.Join(os.TempDir(), "fuzz_data")
+
+	err := os.WriteFile(path, []byte{}, os.ModePerm)
+	if err != nil {
+		f.Error(err)
+	}
+
+	err = os.Setenv("GITHUB_OUTPUT", path)
+	if err != nil {
+		f.Error(err)
+	}
+
+	f.Add("FUZZ_TEST", true)
+	f.Fuzz(func(t *testing.T, s string, b bool) {
+		output.Write(s, b)
+	})
+
+}

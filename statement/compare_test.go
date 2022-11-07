@@ -75,3 +75,28 @@ func TestCompare(t *testing.T) {
 	}
 
 }
+
+// BenchmarkCompare is to test the Compare function benchmark timing.
+func BenchmarkCompare(b *testing.B) {
+
+	for i := 0; i < b.N; i++ {
+		_, err := statement.Compare("1.5.0", "2.4.4")
+		if err != nil {
+			b.Error(err)
+		}
+	}
+
+}
+
+// FuzzCompare is to test the Compare function with fuzz testing.
+func FuzzCompare(f *testing.F) {
+
+	f.Add("2.2.0", "2.3.0")
+	f.Fuzz(func(t *testing.T, s1, s2 string) {
+		_, err := statement.Compare(s1, s2)
+		if err != nil {
+			f.Fuzz(err)
+		}
+	})
+
+}

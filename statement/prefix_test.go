@@ -66,3 +66,22 @@ func TestPrefix(t *testing.T) {
 	}
 
 }
+
+// BenchmarkPrefix is to test the Prefix function benchmark timing.
+func BenchmarkPrefix(b *testing.B) {
+
+	for i := 0; i < b.N; i++ {
+		_ = statement.Prefix("v3.7.0-alpha.2+testing-12345a", "v")
+	}
+
+}
+
+// FuzzPrefix is to test the Prefix function with fuzz testing.
+func FuzzPrefix(f *testing.F) {
+
+	f.Add("v2.2.0-beta.1", "v")
+	f.Fuzz(func(t *testing.T, s1, s2 string) {
+		_ = statement.Prefix(s1, s2)
+	})
+
+}

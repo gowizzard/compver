@@ -123,3 +123,28 @@ func TestSplit(t *testing.T) {
 	}
 
 }
+
+// BenchmarkSplit is to test the Split function benchmark timing.
+func BenchmarkSplit(b *testing.B) {
+
+	for i := 0; i < b.N; i++ {
+		_, err := version_core.Split("3.7.0-alpha.2+testing-12345a")
+		if err != nil {
+			b.Error(err)
+		}
+	}
+
+}
+
+// FuzzSplit is to test the Split function with fuzz testing.
+func FuzzSplit(f *testing.F) {
+
+	f.Add("2.2.0+testing-67890b")
+	f.Fuzz(func(t *testing.T, s string) {
+		_, err := version_core.Split(s)
+		if err != nil {
+			f.Error(err)
+		}
+	})
+
+}

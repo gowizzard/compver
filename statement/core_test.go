@@ -69,3 +69,28 @@ func TestCore(t *testing.T) {
 	}
 
 }
+
+// BenchmarkCore is to test the Core function benchmark timing.
+func BenchmarkCore(b *testing.B) {
+
+	for i := 0; i < b.N; i++ {
+		_, err := statement.Core("3.5.0", "major")
+		if err != nil {
+			b.Error(err)
+		}
+	}
+
+}
+
+// FuzzCore is to test the Core function with fuzz testing.
+func FuzzCore(f *testing.F) {
+
+	f.Add("1.20.4", "patch")
+	f.Fuzz(func(t *testing.T, s1, s2 string) {
+		_, err := statement.Core(s1, s2)
+		if err != nil {
+			f.Error(err)
+		}
+	})
+
+}

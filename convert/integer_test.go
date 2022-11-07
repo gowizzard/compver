@@ -61,3 +61,22 @@ func TestInteger(t *testing.T) {
 	}
 
 }
+
+// BenchmarkInteger is to test the Integer function benchmark timing.
+func BenchmarkInteger(b *testing.B) {
+
+	for i := 0; i < b.N; i++ {
+		_ = convert.Integer("14")
+	}
+
+}
+
+// FuzzInteger is to test the Integer function with fuzz testing.
+func FuzzInteger(f *testing.F) {
+
+	f.Add("42")
+	f.Fuzz(func(t *testing.T, s string) {
+		_ = convert.Integer(s)
+	})
+
+}
