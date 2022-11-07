@@ -51,3 +51,13 @@ func BenchmarkPrint(b *testing.B) {
 	}
 
 }
+
+// FuzzPrint is to test the Print function with fuzz testing.
+func FuzzPrint(f *testing.F) {
+
+	f.Add(0, "%s\n", "This is a fuzz test")
+	f.Fuzz(func(t *testing.T, i int, s1, s2 string) {
+		command_line.Print(i, s1, s2)
+	})
+
+}

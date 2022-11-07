@@ -75,3 +75,13 @@ func BenchmarkPrefix(b *testing.B) {
 	}
 
 }
+
+// FuzzPrefix is to test the Prefix function with fuzz testing.
+func FuzzPrefix(f *testing.F) {
+
+	f.Add("v2.2.0-beta.1", "v")
+	f.Fuzz(func(t *testing.T, s1, s2 string) {
+		_ = statement.Prefix(s1, s2)
+	})
+
+}
