@@ -135,3 +135,16 @@ func BenchmarkSplit(b *testing.B) {
 	}
 
 }
+
+// FuzzSplit is to test the Split function with fuzz testing.
+func FuzzSplit(f *testing.F) {
+
+	f.Add("2.2.0+testing-67890b")
+	f.Fuzz(func(t *testing.T, s string) {
+		_, err := version_core.Split(s)
+		if err != nil {
+			f.Error(err)
+		}
+	})
+
+}
