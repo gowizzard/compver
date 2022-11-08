@@ -33,7 +33,7 @@ func Write(key string, value any) {
 	}
 
 	if flag.Lookup("test.v") == nil {
-		defer os.Exit(0)
+		os.Exit(0)
 	}
 
 }
