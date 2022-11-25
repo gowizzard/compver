@@ -13,6 +13,7 @@ import (
 	"testing"
 )
 
+// TestWrite is to test the write function.
 func TestWrite(t *testing.T) {
 
 	tests := []struct {
