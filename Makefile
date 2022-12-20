@@ -13,10 +13,11 @@ vet:
 	@go vet ./...
 
 test:
-	@go test -bench=. ./...
+	go test -v ./... -bench=.
 
-lint:
-	@golangci-lint run ./...
+coverage:
+	@go test ./... -coverprofile=cover.out
+	@go tool cover -html=cover.out
 
 doc:
 	@godoc -play=true -goroot=/usr/local/go -http=:6060
