@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://user-images.githubusercontent.com/30717818/190334331-e1aea304-eb4e-4848-9333-2a8156be26ba.svg" width="150">
+<img src="https://user-images.githubusercontent.com/30717818/190334331-e1aea304-eb4e-4848-9333-2a8156be26ba.svg" alt="CompVer" width="150">
 
 # CompVer
 
