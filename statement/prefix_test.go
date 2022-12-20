@@ -20,34 +20,16 @@ func TestPrefix(t *testing.T) {
 		expected string
 	}{
 		{
-			name:     "VERSION=v1.2.4",
+			name:     "WITH_PREFIX",
 			version:  "v1.2.4",
 			prefix:   "v",
 			expected: "1.2.4",
 		},
 		{
-			name:     "VERSION=1.11.8-beta.1",
+			name:     "WITHOUT_PREFIX",
 			version:  "1.11.8-beta.1",
 			prefix:   "",
 			expected: "1.11.8-beta.1",
-		},
-		{
-			name:     "VERSION=v3.7.0-alpha.2+testing-12345a",
-			version:  "v3.7.0-alpha.2+testing-12345a",
-			prefix:   "v",
-			expected: "3.7.0-alpha.2+testing-12345a",
-		},
-		{
-			name:     "VERSION=version3.34.7",
-			version:  "version3.34.7",
-			prefix:   "version",
-			expected: "3.34.7",
-		},
-		{
-			name:     "VERSION=v0.12.0",
-			version:  "v0.12.0",
-			prefix:   "v",
-			expected: "0.12.0",
 		},
 	}
 
