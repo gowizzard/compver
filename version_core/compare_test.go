@@ -21,7 +21,7 @@ func TestCompare(t *testing.T) {
 		expected string
 	}{
 		{
-			name: "MAJOR=update",
+			name: "MAJOR_UPDATE",
 			version1: version_core.Core{
 				Major: 12,
 				Minor: 0,
@@ -35,7 +35,7 @@ func TestCompare(t *testing.T) {
 			expected: "major update",
 		},
 		{
-			name: "MAJOR=downgrade",
+			name: "MAJOR_DOWNGRADE",
 			version1: version_core.Core{
 				Major: 3,
 				Minor: 34,
@@ -49,7 +49,7 @@ func TestCompare(t *testing.T) {
 			expected: "major downgrade",
 		},
 		{
-			name: "MINOR=update",
+			name: "MINOR_UPDATE",
 			version1: version_core.Core{
 				Major: 1,
 				Minor: 3,
@@ -63,7 +63,7 @@ func TestCompare(t *testing.T) {
 			expected: "minor update",
 		},
 		{
-			name: "MINOR=downgrade",
+			name: "MINOR_DOWNGRADE",
 			version1: version_core.Core{
 				Major: 4,
 				Minor: 3,
@@ -77,7 +77,7 @@ func TestCompare(t *testing.T) {
 			expected: "minor downgrade",
 		},
 		{
-			name: "PATCH=update",
+			name: "PATCH_UPDATE",
 			version1: version_core.Core{
 				Major: 1,
 				Minor: 19,
@@ -91,7 +91,7 @@ func TestCompare(t *testing.T) {
 			expected: "patch update",
 		},
 		{
-			name: "PATCH=downgrade",
+			name: "PATCH_DOWNGRADE",
 			version1: version_core.Core{
 				Major: 6,
 				Minor: 9,
@@ -103,6 +103,20 @@ func TestCompare(t *testing.T) {
 				Patch: 11,
 			},
 			expected: "patch downgrade",
+		},
+		{
+			name: "NO_CHANGES",
+			version1: version_core.Core{
+				Major: 1,
+				Minor: 0,
+				Patch: 0,
+			},
+			version2: version_core.Core{
+				Major: 1,
+				Minor: 0,
+				Patch: 0,
+			},
+			expected: "no changes",
 		},
 	}
 
