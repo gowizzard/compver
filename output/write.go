@@ -6,34 +6,29 @@
 package output
 
 import (
-	"flag"
 	"fmt"
-	"github.com/gowizzard/compver/v5/command_line"
 	"os"
 )
 
 // Write is to write an environment variable to the github output file.
-func Write(key string, value any) {
+func Write(key string, value any) error {
 
 	path := os.Getenv("GITHUB_OUTPUT")
 	file, err := os.OpenFile(path, os.O_APPEND|os.O_WRONLY, os.ModeAppend)
 	if err != nil {
-		command_line.Print(1, "the output file cannot be opened\n")
+		return err
 	}
+
+	defer func(file *os.File) {
+		_ = file.Close()
+	}(file)
 
 	output := fmt.Appendf([]byte{}, "%s=\"%v\"\n", key, value)
 	_, err = file.Write(output)
 	if err != nil {
-		command_line.Print(1, "the string cannot be written to the output\n")
+		return err
 	}
 
-	err = file.Close()
-	if err != nil {
-		command_line.Print(1, "the output file cannot be closed")
-	}
-
-	if flag.Lookup("test.v") == nil {
-		os.Exit(0)
-	}
+	return nil
 
 }
