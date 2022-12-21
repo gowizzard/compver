@@ -181,23 +181,3 @@ func BenchmarkCompare(b *testing.B) {
 	}
 
 }
-
-// FuzzCompare is to test the Compare function with fuzz testing.
-func FuzzCompare(f *testing.F) {
-
-	f.Add("major", 1, 2)
-	f.Fuzz(func(t *testing.T, s string, i1, i2 int) {
-
-		blocks := []version_core.Block{
-			{
-				Name:    s,
-				Number1: i1,
-				Number2: i2,
-			},
-		}
-
-		_ = version_core.Compare(blocks)
-
-	})
-
-}

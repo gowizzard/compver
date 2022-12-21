@@ -126,25 +126,3 @@ func BenchmarkWrite(b *testing.B) {
 	}
 
 }
-
-// FuzzWrite is to test the Write function with fuzz testing.
-func FuzzWrite(f *testing.F) {
-
-	path := filepath.Join(os.TempDir(), "fuzz_data")
-
-	err := os.WriteFile(path, []byte{}, os.ModePerm)
-	if err != nil {
-		f.Error(err)
-	}
-
-	err = os.Setenv("GITHUB_OUTPUT", path)
-	if err != nil {
-		f.Error(err)
-	}
-
-	f.Add("FUZZ_TEST", true)
-	f.Fuzz(func(t *testing.T, s string, b bool) {
-		output.Write(s, b)
-	})
-
-}

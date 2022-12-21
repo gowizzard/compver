@@ -101,16 +101,3 @@ func BenchmarkCore(b *testing.B) {
 	}
 
 }
-
-// FuzzCore is to test the Core function with fuzz testing.
-func FuzzCore(f *testing.F) {
-
-	f.Add("1.20.4", "patch")
-	f.Fuzz(func(t *testing.T, s1, s2 string) {
-		_, err := statement.Core(s1, s2)
-		if err != nil {
-			f.Error(err)
-		}
-	})
-
-}

@@ -75,13 +75,3 @@ func BenchmarkInteger(b *testing.B) {
 	}
 
 }
-
-// FuzzInteger is to test the Integer function with fuzz testing.
-func FuzzInteger(f *testing.F) {
-
-	f.Add("42")
-	f.Fuzz(func(t *testing.T, s string) {
-		_ = convert.Integer(s)
-	})
-
-}
