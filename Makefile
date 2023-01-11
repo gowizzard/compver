@@ -16,8 +16,8 @@ test:
 	go test -v ./... -bench=.
 
 coverage:
-	@go test ./... -coverprofile=cover.out
-	@go tool cover -html=cover.out
+	@go test ./... -coverprofile=coverage.out
+	@go tool cover -html=coverage.out
 
 doc:
 	@godoc -play=true -goroot=/usr/local/go -http=:6060
