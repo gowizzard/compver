@@ -15,15 +15,9 @@ var regex = regexp.MustCompile(`^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(
 
 // Split is to check the given version as a string. The function checks
 // the string with regex and split the value in major, minor, patch, prerelease & buildmetadata.
-func Split(version string) (Core, error) {
+func Split(version string) (*Core, error) {
 
-	core := Core{
-		Major:         0,
-		Minor:         0,
-		Patch:         0,
-		PreRelease:    "",
-		BuildMetadata: "",
-	}
+	core := new(Core)
 
 	if !regex.Match([]byte(version)) {
 		return core, errors.New("it is not a semantic version number")

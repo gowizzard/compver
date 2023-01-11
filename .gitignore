@@ -2,3 +2,5 @@
 # After that we ignore all other files.
 .idea/
 build/
+
+*.out

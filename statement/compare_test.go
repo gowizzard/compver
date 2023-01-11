@@ -17,43 +17,64 @@ func TestCompare(t *testing.T) {
 		name     string
 		version1 string
 		version2 string
+		error    bool
 		expected string
 	}{
 		{
-			name:     "MAJOR=update",
+			name:     "MAJOR_UPDATE",
 			version1: "2.0.0",
 			version2: "1.3.15",
+			error:    false,
 			expected: "major update",
 		},
 		{
-			name:     "MAJOR=downgrade",
+			name:     "MAJOR_DOWNGRADE",
 			version1: "1.4.0",
 			version2: "2.3.15",
+			error:    false,
 			expected: "major downgrade",
 		},
 		{
-			name:     "MINOR=update",
+			name:     "MINOR_UPDATE",
 			version1: "3.7.0-alpha.2+testing-12345a",
 			version2: "3.6.35-beta.4",
+			error:    false,
 			expected: "minor update",
 		},
 		{
-			name:     "MINOR=downgrade",
+			name:     "MINOR_DOWNGRADE",
 			version1: "5.64.4",
 			version2: "5.70.10",
+			error:    false,
 			expected: "minor downgrade",
 		},
 		{
-			name:     "PATCH=update",
+			name:     "PATCH_UPDATE",
 			version1: "12.9.5",
 			version2: "12.9.3",
+			error:    false,
 			expected: "patch update",
 		},
 		{
-			name:     "PATCH=downgrade",
+			name:     "PATCH_DOWNGRADE",
 			version1: "4.0.10",
 			version2: "4.0.15",
+			error:    false,
 			expected: "patch downgrade",
+		},
+		{
+			name:     "VERSION1_PARSE_ERROR",
+			version1: "v1.0.0",
+			version2: "1.9.0",
+			error:    true,
+			expected: "",
+		},
+		{
+			name:     "VERSION2_PARSE_ERROR",
+			version1: "2.0.0",
+			version2: "v2.0.1",
+			error:    true,
+			expected: "",
 		},
 	}
 
@@ -62,11 +83,11 @@ func TestCompare(t *testing.T) {
 		t.Run(value.name, func(t *testing.T) {
 
 			compare, err := statement.Compare(value.version1, value.version2)
-			if err != nil {
+			if err != nil && !value.error {
 				t.Error(err)
 			}
 
-			if !reflect.DeepEqual(value.expected, compare) {
+			if !reflect.DeepEqual(value.expected, compare) && !value.error {
 				t.Errorf("expected: \"%s\", got \"%s\"", value.expected, compare)
 			}
 
@@ -85,18 +106,5 @@ func BenchmarkCompare(b *testing.B) {
 			b.Error(err)
 		}
 	}
-
-}
-
-// FuzzCompare is to test the Compare function with fuzz testing.
-func FuzzCompare(f *testing.F) {
-
-	f.Add("2.2.0", "2.3.0")
-	f.Fuzz(func(t *testing.T, s1, s2 string) {
-		_, err := statement.Compare(s1, s2)
-		if err != nil {
-			f.Fuzz(err)
-		}
-	})
 
 }

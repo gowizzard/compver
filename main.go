@@ -9,9 +9,9 @@ package main
 import (
 	"flag"
 	"github.com/gowizzard/compver/v5/build_information"
-	"github.com/gowizzard/compver/v5/command_line"
 	"github.com/gowizzard/compver/v5/output"
 	"github.com/gowizzard/compver/v5/statement"
+	"log"
 	"os"
 	"reflect"
 )
@@ -20,11 +20,13 @@ import (
 // version1, version2 is to save the version numbers from the flags.
 // visit is to store the specified flags as a positive value.
 // action checks if it is a GitHub action.
+// logger is to write the log data to command line.
 var (
 	version, trim, compare, core      bool
 	version1, version2, prefix, block string
 	visit                             = make(map[string]bool)
 	action                            = os.Getenv("GITHUB_ACTIONS") == "true"
+	logger                            = log.New(os.Stderr, "", 0)
 )
 
 // init is to parse the versions from the flags and check all visited flags.
@@ -52,7 +54,8 @@ func init() {
 func main() {
 
 	if version {
-		command_line.Print(0, "version: %s\n", build_information.Version)
+		logger.Printf("version: %s", build_information.Version)
+		return
 	}
 
 	if trim && visit["prefix"] {
@@ -71,15 +74,20 @@ func main() {
 
 		result, err := statement.Compare(version1, version2)
 		if err != nil {
-			command_line.Print(1, "%s\n", err)
+			logger.Fatal(err)
 		}
 
 		switch {
 		case action:
-			output.Write("compare_result", result)
+			err = output.Write("compare_result", result)
+			if err != nil {
+				logger.Fatal(err)
+			}
 		default:
-			command_line.Print(0, "%s\n", result)
+			logger.Print(result)
 		}
+
+		return
 
 	}
 
@@ -87,7 +95,7 @@ func main() {
 
 		result, err := statement.Core(version1, block)
 		if err != nil {
-			command_line.Print(1, "%s\n", err)
+			logger.Fatal(err)
 		}
 
 		switch result.(type) {
@@ -99,13 +107,18 @@ func main() {
 
 		switch {
 		case action:
-			output.Write("core_result", result)
+			err = output.Write("core_result", result)
+			if err != nil {
+				logger.Fatal(err)
+			}
 		default:
-			command_line.Print(0, "%v\n", result)
+			logger.Print(result)
 		}
+
+		return
 
 	}
 
-	command_line.Print(1, "no statement flags were specified\n")
+	logger.Fatal("no statement flags were specified")
 
 }

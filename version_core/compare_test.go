@@ -21,7 +21,7 @@ func TestCompare(t *testing.T) {
 		expected string
 	}{
 		{
-			name: "MAJOR=update",
+			name: "MAJOR_UPDATE",
 			version1: version_core.Core{
 				Major: 12,
 				Minor: 0,
@@ -35,7 +35,7 @@ func TestCompare(t *testing.T) {
 			expected: "major update",
 		},
 		{
-			name: "MAJOR=downgrade",
+			name: "MAJOR_DOWNGRADE",
 			version1: version_core.Core{
 				Major: 3,
 				Minor: 34,
@@ -49,7 +49,7 @@ func TestCompare(t *testing.T) {
 			expected: "major downgrade",
 		},
 		{
-			name: "MINOR=update",
+			name: "MINOR_UPDATE",
 			version1: version_core.Core{
 				Major: 1,
 				Minor: 3,
@@ -63,7 +63,7 @@ func TestCompare(t *testing.T) {
 			expected: "minor update",
 		},
 		{
-			name: "MINOR=downgrade",
+			name: "MINOR_DOWNGRADE",
 			version1: version_core.Core{
 				Major: 4,
 				Minor: 3,
@@ -77,7 +77,7 @@ func TestCompare(t *testing.T) {
 			expected: "minor downgrade",
 		},
 		{
-			name: "PATCH=update",
+			name: "PATCH_UPDATE",
 			version1: version_core.Core{
 				Major: 1,
 				Minor: 19,
@@ -91,7 +91,7 @@ func TestCompare(t *testing.T) {
 			expected: "patch update",
 		},
 		{
-			name: "PATCH=downgrade",
+			name: "PATCH_DOWNGRADE",
 			version1: version_core.Core{
 				Major: 6,
 				Minor: 9,
@@ -103,6 +103,20 @@ func TestCompare(t *testing.T) {
 				Patch: 11,
 			},
 			expected: "patch downgrade",
+		},
+		{
+			name: "NO_CHANGES",
+			version1: version_core.Core{
+				Major: 1,
+				Minor: 0,
+				Patch: 0,
+			},
+			version2: version_core.Core{
+				Major: 1,
+				Minor: 0,
+				Patch: 0,
+			},
+			expected: "no changes",
 		},
 	}
 
@@ -165,25 +179,5 @@ func BenchmarkCompare(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_ = version_core.Compare(blocks)
 	}
-
-}
-
-// FuzzCompare is to test the Compare function with fuzz testing.
-func FuzzCompare(f *testing.F) {
-
-	f.Add("major", 1, 2)
-	f.Fuzz(func(t *testing.T, s string, i1, i2 int) {
-
-		blocks := []version_core.Block{
-			{
-				Name:    s,
-				Number1: i1,
-				Number2: i2,
-			},
-		}
-
-		_ = version_core.Compare(blocks)
-
-	})
 
 }

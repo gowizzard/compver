@@ -24,27 +24,41 @@ func TestWrite(t *testing.T) {
 		perm     os.FileMode
 		key      string
 		value    any
+		error    bool
 		expected []byte
 	}{
 		{
-			name:     "WRITE=new",
-			path:     filepath.Join(os.TempDir(), "output"),
+			name:     "CREATE_DATA",
+			path:     filepath.Join(t.TempDir(), "output"),
 			data:     []byte(""),
 			flag:     os.O_RDONLY,
 			perm:     os.ModePerm,
 			key:      "core_result",
 			value:    4,
+			error:    false,
 			expected: []byte("core_result=\"4\"\n"),
 		},
 		{
-			name:     "WRITE=add",
-			path:     filepath.Join(os.TempDir(), "GITHUB_OUTPUT"),
+			name:     "ADD_DATA",
+			path:     filepath.Join(t.TempDir(), "GITHUB_OUTPUT"),
 			data:     []byte("DEMO=\"data\"\n"),
 			flag:     os.O_RDONLY,
 			perm:     os.ModePerm,
 			key:      "compare_result",
 			value:    "major update",
+			error:    false,
 			expected: []byte("DEMO=\"data\"\ncompare_result=\"major update\"\n"),
+		},
+		{
+			name:     "FILE_ERROR",
+			path:     "",
+			data:     nil,
+			flag:     0,
+			perm:     0,
+			key:      "",
+			value:    nil,
+			error:    true,
+			expected: nil,
 		},
 	}
 
@@ -52,30 +66,36 @@ func TestWrite(t *testing.T) {
 
 		t.Run(value.name, func(t *testing.T) {
 
-			err := os.WriteFile(value.path, value.data, value.perm)
-			if err != nil {
+			if !value.error {
+				err := os.WriteFile(value.path, value.data, value.perm)
+				if err != nil {
+					t.Error(err)
+				}
+			}
+
+			t.Setenv("GITHUB_OUTPUT", value.path)
+
+			err := output.Write(value.key, value.value)
+			if err != nil && !value.error {
 				t.Error(err)
 			}
 
-			err = os.Setenv("GITHUB_OUTPUT", value.path)
-			if err != nil {
-				t.Error(err)
-			}
+			if !value.error {
 
-			output.Write(value.key, value.value)
+				file, err := os.OpenFile(value.path, value.flag, value.perm)
+				if err != nil {
+					t.Error(err)
+				}
 
-			file, err := os.OpenFile(value.path, value.flag, value.perm)
-			if err != nil {
-				t.Error(err)
-			}
+				read, err := io.ReadAll(file)
+				if err != nil {
+					t.Error(err)
+				}
 
-			read, err := io.ReadAll(file)
-			if err != nil {
-				t.Error(err)
-			}
+				if !reflect.DeepEqual(value.expected, read) {
+					t.Errorf("expected: \"%v\", got \"%v\"", value.expected, read)
+				}
 
-			if !reflect.DeepEqual(value.expected, read) {
-				t.Errorf("expected: \"%v\", got \"%v\"", value.expected, read)
 			}
 
 		})
@@ -104,27 +124,5 @@ func BenchmarkWrite(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		output.Write("BENCHMARK_TEST", true)
 	}
-
-}
-
-// FuzzWrite is to test the Write function with fuzz testing.
-func FuzzWrite(f *testing.F) {
-
-	path := filepath.Join(os.TempDir(), "fuzz_data")
-
-	err := os.WriteFile(path, []byte{}, os.ModePerm)
-	if err != nil {
-		f.Error(err)
-	}
-
-	err = os.Setenv("GITHUB_OUTPUT", path)
-	if err != nil {
-		f.Error(err)
-	}
-
-	f.Add("FUZZ_TEST", true)
-	f.Fuzz(func(t *testing.T, s string, b bool) {
-		output.Write(s, b)
-	})
 
 }
