@@ -19,12 +19,13 @@ func Write(key string, value any) error {
 		return err
 	}
 
-	defer func(file *os.File) {
-		_ = file.Close()
-	}(file)
-
 	output := fmt.Appendf([]byte{}, "%s=\"%v\"\n", key, value)
 	_, err = file.Write(output)
+	if err != nil {
+		return err
+	}
+
+	err = file.Close()
 	if err != nil {
 		return err
 	}
