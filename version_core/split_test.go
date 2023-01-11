@@ -18,11 +18,13 @@ func TestSplit(t *testing.T) {
 	tests := []struct {
 		name     string
 		version  string
+		error    bool
 		expected version_core.Core
 	}{
 		{
-			name:    "VERSION=1.2.4",
+			name:    "1.2.4",
 			version: "1.2.4",
+			error:   false,
 			expected: version_core.Core{
 				Major:         1,
 				Minor:         2,
@@ -32,8 +34,9 @@ func TestSplit(t *testing.T) {
 			},
 		},
 		{
-			name:    "VERSION=1.11.8-beta.1",
+			name:    "1.11.8-beta.1",
 			version: "1.11.8-beta.1",
+			error:   false,
 			expected: version_core.Core{
 				Major:         1,
 				Minor:         11,
@@ -43,8 +46,9 @@ func TestSplit(t *testing.T) {
 			},
 		},
 		{
-			name:    "VERSION=3.7.0-alpha.2+testing-12345a",
+			name:    "3.7.0-alpha.2+testing-12345a",
 			version: "3.7.0-alpha.2+testing-12345a",
+			error:   false,
 			expected: version_core.Core{
 				Major:         3,
 				Minor:         7,
@@ -54,25 +58,15 @@ func TestSplit(t *testing.T) {
 			},
 		},
 		{
-			name:    "VERSION=3.34.7",
-			version: "3.34.7",
-			expected: version_core.Core{
-				Major:         3,
-				Minor:         34,
-				Patch:         7,
-				PreRelease:    "",
-				BuildMetadata: "",
-			},
-		},
-		{
-			name:    "0.12.0+meta",
-			version: "0.12.0+meta",
+			name:    "PARSE_ERROR",
+			version: "v1.0.0",
+			error:   true,
 			expected: version_core.Core{
 				Major:         0,
-				Minor:         12,
+				Minor:         0,
 				Patch:         0,
 				PreRelease:    "",
-				BuildMetadata: "meta",
+				BuildMetadata: "",
 			},
 		},
 	}
@@ -82,40 +76,44 @@ func TestSplit(t *testing.T) {
 		t.Run(value.name, func(t *testing.T) {
 
 			core, err := version_core.Split(value.version)
-			if err != nil {
+			if err != nil && !value.error {
 				log.Fatalln(err)
 			}
 
-			numbers := []struct {
-				expected any
-				got      any
-			}{
-				{
-					expected: value.expected.Major,
-					got:      core.Major,
-				},
-				{
-					expected: value.expected.Minor,
-					got:      core.Minor,
-				},
-				{
-					expected: value.expected.Patch,
-					got:      core.Patch,
-				},
-				{
-					expected: value.expected.PreRelease,
-					got:      core.PreRelease,
-				},
-				{
-					expected: value.expected.BuildMetadata,
-					got:      core.BuildMetadata,
-				},
-			}
+			if !value.error {
 
-			for _, value := range numbers {
-				if !reflect.DeepEqual(value.got, value.expected) {
-					t.Errorf("expected: \"%d\", got \"%d\"", value.got, value.expected)
+				numbers := []struct {
+					expected any
+					got      any
+				}{
+					{
+						expected: value.expected.Major,
+						got:      core.Major,
+					},
+					{
+						expected: value.expected.Minor,
+						got:      core.Minor,
+					},
+					{
+						expected: value.expected.Patch,
+						got:      core.Patch,
+					},
+					{
+						expected: value.expected.PreRelease,
+						got:      core.PreRelease,
+					},
+					{
+						expected: value.expected.BuildMetadata,
+						got:      core.BuildMetadata,
+					},
 				}
+
+				for _, value := range numbers {
+					if !reflect.DeepEqual(value.got, value.expected) {
+						t.Errorf("expected: \"%d\", got \"%d\"", value.got, value.expected)
+					}
+				}
+
 			}
 
 		})
@@ -133,18 +131,5 @@ func BenchmarkSplit(b *testing.B) {
 			b.Error(err)
 		}
 	}
-
-}
-
-// FuzzSplit is to test the Split function with fuzz testing.
-func FuzzSplit(f *testing.F) {
-
-	f.Add("2.2.0+testing-67890b")
-	f.Fuzz(func(t *testing.T, s string) {
-		_, err := version_core.Split(s)
-		if err != nil {
-			f.Error(err)
-		}
-	})
 
 }

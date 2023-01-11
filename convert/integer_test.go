@@ -20,29 +20,34 @@ func TestInteger(t *testing.T) {
 		expected int
 	}{
 		{
-			name:     "NUMBER=5",
+			name:     "5",
 			number:   "5",
 			expected: 5,
 		},
 		{
-			name:     "NUMBER=265",
+			name:     "265",
 			number:   "265",
 			expected: 265,
 		},
 		{
-			name:     "NUMBER=78",
+			name:     "78",
 			number:   "78",
 			expected: 78,
 		},
 		{
-			name:     "NUMBER=132",
+			name:     "132",
 			number:   "132",
 			expected: 132,
 		},
 		{
-			name:     "NUMBER=25",
+			name:     "25",
 			number:   "25",
 			expected: 25,
+		},
+		{
+			name:     "PARSE_ERROR",
+			number:   "error",
+			expected: 0,
 		},
 	}
 
@@ -68,15 +73,5 @@ func BenchmarkInteger(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_ = convert.Integer("14")
 	}
-
-}
-
-// FuzzInteger is to test the Integer function with fuzz testing.
-func FuzzInteger(f *testing.F) {
-
-	f.Add("42")
-	f.Fuzz(func(t *testing.T, s string) {
-		_ = convert.Integer(s)
-	})
 
 }

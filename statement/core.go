@@ -4,7 +4,10 @@
 
 package statement
 
-import "github.com/gowizzard/compver/v5/version_core"
+import (
+	"errors"
+	"github.com/gowizzard/compver/v5/version_core"
+)
 
 // Core is to get the version number, split it to core block and return them.
 func Core(version, block string) (any, error) {
@@ -26,6 +29,8 @@ func Core(version, block string) (any, error) {
 		result = core.PreRelease
 	case "buildmetadata":
 		result = core.BuildMetadata
+	default:
+		return nil, errors.New("block not found")
 	}
 
 	return result, nil

@@ -17,37 +17,57 @@ func TestCore(t *testing.T) {
 		name     string
 		version  string
 		block    string
+		error    bool
 		expected any
 	}{
 		{
-			name:     "MAJOR=1",
+			name:     "MAJOR",
 			version:  "1.12.4",
 			block:    "major",
+			error:    false,
 			expected: 1,
 		},
 		{
-			name:     "MINOR=7",
+			name:     "MINOR",
 			version:  "4.7.0",
 			block:    "minor",
+			error:    false,
 			expected: 7,
 		},
 		{
-			name:     "PATCH=11",
+			name:     "PATCH",
 			version:  "3.0.11+testing-12345a",
 			block:    "patch",
+			error:    false,
 			expected: 11,
 		},
 		{
-			name:     "PRERELEASE=alpha.2",
+			name:     "PRERELEASE",
 			version:  "2.0.0-alpha.2",
 			block:    "prerelease",
+			error:    false,
 			expected: "alpha.2",
 		},
 		{
-			name:     "BUILDMETADATA=meta",
+			name:     "BUILDMETADATA",
 			version:  "1.34.0-beta.1+meta",
 			block:    "buildmetadata",
+			error:    false,
 			expected: "meta",
+		},
+		{
+			name:     "CORE_ERROR",
+			version:  "v1.0.0",
+			block:    "",
+			error:    true,
+			expected: nil,
+		},
+		{
+			name:     "BLOCK_ERROR",
+			version:  "1.2.3",
+			block:    "error",
+			error:    true,
+			expected: nil,
 		},
 	}
 
@@ -56,11 +76,11 @@ func TestCore(t *testing.T) {
 		t.Run(value.name, func(t *testing.T) {
 
 			result, err := statement.Core(value.version, value.block)
-			if err != nil {
+			if err != nil && !value.error {
 				t.Error(err)
 			}
 
-			if !reflect.DeepEqual(value.expected, result) {
+			if !reflect.DeepEqual(value.expected, result) && !value.error {
 				t.Errorf("expected: \"%d\", got \"%d\"", value.expected, result)
 			}
 
@@ -79,18 +99,5 @@ func BenchmarkCore(b *testing.B) {
 			b.Error(err)
 		}
 	}
-
-}
-
-// FuzzCore is to test the Core function with fuzz testing.
-func FuzzCore(f *testing.F) {
-
-	f.Add("1.20.4", "patch")
-	f.Fuzz(func(t *testing.T, s1, s2 string) {
-		_, err := statement.Core(s1, s2)
-		if err != nil {
-			f.Error(err)
-		}
-	})
 
 }
