@@ -21,12 +21,14 @@ import (
 // visit is to store the specified flags as a positive value.
 // action checks if it is a GitHub action.
 // logger is to write the log data to command line.
+// data is to store the data from the GitHub output file.
 var (
 	version, trim, compare, core      bool
 	version1, version2, prefix, block string
 	visit                             = make(map[string]bool)
 	action                            = os.Getenv("GITHUB_ACTIONS") == "true"
 	logger                            = log.New(os.Stderr, "", 0)
+	data                              []byte
 )
 
 // init is to parse the versions from the flags and check all visited flags.
@@ -46,6 +48,17 @@ func init() {
 	flag.Visit(func(f *flag.Flag) {
 		visit[f.Name] = true
 	})
+
+	if action {
+
+		read, err := output.Read()
+		if err != nil {
+			logger.Fatal(err)
+		}
+
+		data = read
+
+	}
 
 }
 
@@ -79,7 +92,7 @@ func main() {
 
 		switch {
 		case action:
-			err = output.Write("compare_result", result)
+			err = output.Write("compare_result", result, data)
 			if err != nil {
 				logger.Fatal(err)
 			}
@@ -107,7 +120,7 @@ func main() {
 
 		switch {
 		case action:
-			err = output.Write("core_result", result)
+			err = output.Write("core_result", result, data)
 			if err != nil {
 				logger.Fatal(err)
 			}
