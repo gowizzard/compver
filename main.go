@@ -50,14 +50,11 @@ func init() {
 	})
 
 	if action {
-
-		read, err := output.Read()
+		var err error
+		data, err = output.Read()
 		if err != nil {
 			logger.Fatal(err)
 		}
-
-		data = read
-
 	}
 
 }
