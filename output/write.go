@@ -11,21 +11,12 @@ import (
 )
 
 // Write is to write an environment variable to the github output file.
-func Write(key string, value any) error {
+func Write(key string, value any, read []byte) error {
 
 	path := os.Getenv("GITHUB_OUTPUT")
-	file, err := os.OpenFile(path, os.O_APPEND|os.O_WRONLY, os.ModeAppend)
-	if err != nil {
-		return err
-	}
+	data := fmt.Appendf(read, "%s=\"%v\"\n", key, value)
 
-	output := fmt.Appendf([]byte{}, "%s=\"%v\"\n", key, value)
-	_, err = file.Write(output)
-	if err != nil {
-		return err
-	}
-
-	err = file.Close()
+	err := os.WriteFile(path, data, os.ModePerm)
 	if err != nil {
 		return err
 	}
