@@ -18,7 +18,7 @@ In order to install the tool correctly, you need to download it [here](https://g
 
 ```bash
 # Download the binary
-curl -L -o compver <URL>
+curl -L -o compver https://github.com/gowizzard/compver/releases/latest/download/<BINARY>
 
 # Make the binary executable 
 chmod +x compver
@@ -91,7 +91,7 @@ jobs:
         id: compver
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        uses: gowizzard/compver@v5.3.0
+        uses: gowizzard/compver@v5.5.0
         with:
           args: "-core -block major -version1 ${{ github.ref_name }} -trim -prefix v"
 
