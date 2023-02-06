@@ -2,7 +2,7 @@
 BINARY_NAME=compver
 LIST=$(shell go list)
 GIT_TAG=$(shell git describe --tags --abbrev=0)
-VERSION=$(if $(GIT_TAG),$(GIT_TAG),unavailible)
+VERSION=$(if $(GIT_TAG),$(GIT_TAG),unavailable)
 LDFLAGS=-ldflags "-X '${LIST}/build_information.Version=${VERSION}'"
 DOCKER_HUB_USERNAME=gowizzard
 
