@@ -16,7 +16,7 @@ var (
 // init is to add the version if the binary is installed via `go install`.
 func init() {
 
-	if len(Version) == 0 || Version == "unavailable" {
+	if len(Version) == 0 {
 		info, ok := debug.ReadBuildInfo()
 		if ok {
 			switch info.Main.Version {
