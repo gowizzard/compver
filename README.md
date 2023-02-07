@@ -14,11 +14,21 @@ Our version specifications are based on semantic versioning. [Here](https://semv
 
 ## Installation
 
-In order to install the tool correctly, you need to download it [here](https://github.com/gowizzard/compver/releases) and make it executable. After that you can move the binary into the application folder and use it via the terminal.
+### go install
+
+If you have Go installed on your local machine, you can install the tool via the following command.
+
+```bash
+go install github.com/gowizzard/compver/v5@latest
+```
+
+### Install binary
+
+If you don't want to install Go on your local machine, you can also use the binary. In order to install the tool correctly, you need to download it [here](https://github.com/gowizzard/compver/releases) and make it executable. After that you can move the binary into the application folder and use it via the terminal.
 
 ```bash
 # Download the binary
-curl -L -o compver https://github.com/gowizzard/compver/releases/latest/download/<BINARY>
+curl -L -o compver https://github.com/gowizzard/compver/releases/latest/download/compver-<ARCH>-<OS>
 
 # Make the binary executable 
 chmod +x compver
