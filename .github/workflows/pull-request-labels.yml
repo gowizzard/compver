@@ -1,0 +1,39 @@
+name: Pull Request Labels
+
+on:
+    pull_request:
+        types: [opened]
+
+jobs:
+    pull-request-labeler:
+
+        runs-on: ubuntu-latest
+
+        permissions:
+            pull-requests: write
+
+        steps:
+
+            - name: Add label to pull request
+              uses: actions/github-script@v6
+              with:
+                  script: |
+                      const title = context.payload.pull_request.title.toLowerCase();
+                      if (!title) return;
+                      
+                      function getLabelFromTitle(title) {
+                          if (title.includes('feat!:')) return 'breaking change';
+                          if (title.includes('fix:')) return 'fix';
+                          if (title.includes('feat:')) return 'feature';
+                          return null;
+                      }
+                  
+                      const label = getLabelFromTitle(title);
+                      if (label) {
+                          github.rest.issues.addLabels({
+                              issue_number: context.issue.number,
+                              owner: context.repo.owner,
+                              repo: context.repo.repo,
+                              labels: [label] 
+                          });
+                      }
