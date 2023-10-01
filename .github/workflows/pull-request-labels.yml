@@ -1,0 +1,22 @@
+name: Pull Request Labels
+
+on:
+    pull_request:
+        types: [opened]
+
+jobs:
+    pull-request-labeler:
+
+        runs-on: ubuntu-latest
+
+        permissions:
+            pull-requests: write
+
+        steps:
+
+            - name: Add label to pull request
+              uses: actions/github-script@v6
+              with:
+                  script: |
+                    const label = require('./scripts/label.js')
+                    label({github, context})
