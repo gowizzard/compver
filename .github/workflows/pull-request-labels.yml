@@ -31,9 +31,9 @@ jobs:
                       const label = getLabelFromTitle(title);
                       if (label) {
                           github.rest.issues.addLabels({
-                              issue_number: issue.number,
-                              owner: repo.owner,
-                              repo: repo.repo,
-                              labels: [label]
+                              issue_number: context.issue.number,
+                              owner: context.repo.owner,
+                              repo: context.repo.repo,
+                              labels: [label] 
                           });
                       }
